@@ -4,21 +4,21 @@ import com.google.gson.annotations.SerializedName
 
 data class PassengersResponse(
     @SerializedName("data")
-    val data: List<Passenger>
+    val passengerNetworkList: List<PassengerNetwork>
 )
 
-data class Passenger(
+data class PassengerNetwork(
     @SerializedName("_id")
     val id: String,
     @SerializedName("name")
     val name: String,
     @SerializedName("trips")
-    val trips: Int,
+    val trips: Double,
     @SerializedName("airline")
-    val airlines: List<Airline>,
+    val airlinesNetwork: List<AirlineNetwork>,
 )
 
-data class Airline(
+data class AirlineNetwork(
     @SerializedName("id")
     val id: Int,
     @SerializedName("name")
