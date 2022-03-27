@@ -4,12 +4,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.pagingsample.R
+import com.example.pagingsample.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_main.*
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    private val binding: ActivityMainBinding by viewBinding()
 
     private val navHostFragment by lazy {
         supportFragmentManager.findFragmentById(
@@ -22,7 +25,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        bottom_nav.setupWithNavController(navController)
+        binding.bottomNav.setupWithNavController(navController)
     }
 }

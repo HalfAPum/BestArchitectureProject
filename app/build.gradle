@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
-apply plugin: 'kotlin-android-extensions'
 
 android {
   compileSdk 31
@@ -34,9 +33,14 @@ android {
       proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
     }
   }
+
   compileOptions {
     sourceCompatibility JavaVersion.VERSION_1_8
     targetCompatibility JavaVersion.VERSION_1_8
+  }
+
+  buildFeatures {
+    viewBinding true
   }
 }
 
@@ -88,6 +92,9 @@ dependencies {
 
   // Testing Navigation
   androidTestImplementation("androidx.navigation:navigation-testing:2.4.1")
+
+  //ViewBindingDelegate
+  implementation 'com.github.kirich1409:viewbindingpropertydelegate:1.5.3'
 
   //Tests
   // Local Unit Tests

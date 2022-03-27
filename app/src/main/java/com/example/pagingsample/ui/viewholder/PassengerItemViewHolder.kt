@@ -5,25 +5,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pagingsample.R
+import com.example.pagingsample.databinding.PassengerItemLayoutBinding
 import com.example.pagingsample.model.api.PassengerNetwork
 import com.example.pagingsample.model.local.Passenger
 import com.example.pagingsample.ui.viewholder.base.BaseItemViewHolder
-import kotlinx.android.synthetic.main.passenger_item_layout.view.*
 
-class PassengerItemViewHolder(view: View) :
-    BaseItemViewHolder<Passenger>(view) {
+class PassengerItemViewHolder(private val binding: PassengerItemLayoutBinding) :
+    BaseItemViewHolder<Passenger>(binding.root) {
 
     override fun update(item: Passenger) {
-        with(itemView) {
-            passenger_name.text = item.name
-        }
+        binding.passengerName.text = item.name
     }
 
     companion object {
 
         fun create(parent: ViewGroup) = PassengerItemViewHolder(
-            LayoutInflater.from(parent.context).inflate(
-                R.layout.passenger_item_layout,
+            PassengerItemLayoutBinding.inflate(
+                LayoutInflater.from(parent.context),
                 parent,
                 false,
             )

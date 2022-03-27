@@ -8,19 +8,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.pagingsample.R
+import com.example.pagingsample.databinding.FragmentPassengerBinding
 import com.example.pagingsample.ui.adapter.PassengersPagingAdapter
 import com.example.pagingsample.ui.launchSubscribeFlow
 import com.example.pagingsample.ui.subscribeFlow
 import com.example.pagingsample.viewmodel.AirlineViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_passenger.*
 import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
 class PassengerFragment : Fragment() {
 
     private val viewModel : AirlineViewModel by viewModels()
+
+    private val binding : FragmentPassengerBinding by viewBinding()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,9 +35,8 @@ class PassengerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        recycler_view.layoutManager = LinearLayoutManager(requireContext())
         val adapter = PassengersPagingAdapter()
-        recycler_view.adapter = adapter
+        binding.recyclerView.adapter = adapter
 
         launchSubscribeFlow {
             viewModel.subscribePassengers().collectLatest {

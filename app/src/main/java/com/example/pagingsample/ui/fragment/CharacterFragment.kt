@@ -9,14 +9,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.pagingsample.R
+import com.example.pagingsample.databinding.FragmentCharacterBinding
 import com.example.pagingsample.ui.adapter.CharacterPagingAdapter
 import com.example.pagingsample.ui.launchSubscribeFlow
 import com.example.pagingsample.ui.subscribeFlow
 import com.example.pagingsample.viewmodel.AirlineViewModel
 import com.example.pagingsample.viewmodel.RickAndMortyViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_character.*
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -24,6 +25,8 @@ import kotlinx.coroutines.launch
 class CharacterFragment : Fragment() {
 
     private val viewModel : RickAndMortyViewModel by viewModels()
+
+    private val binding: FragmentCharacterBinding by viewBinding()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,9 +38,8 @@ class CharacterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        recycler_view.layoutManager = LinearLayoutManager(requireContext())
         val adapter = CharacterPagingAdapter()
-        recycler_view.adapter = adapter
+        binding.recyclerView.adapter = adapter
 
         launchSubscribeFlow {
             viewModel.subscribeCharacters().collectLatest {
