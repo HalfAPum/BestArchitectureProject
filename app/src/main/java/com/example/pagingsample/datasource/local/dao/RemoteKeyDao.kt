@@ -13,6 +13,6 @@ interface RemoteKeyDao : BaseDao<RemoteKey> {
     override suspend fun clear()
 
     @Query("SELECT * FROM RemoteKey WHERE id = :id")
-    suspend fun get(id: String): RemoteKey
+    suspend fun getById(id: String): RemoteKey
 
 }

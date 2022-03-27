@@ -9,6 +9,7 @@ import com.example.pagingsample.datasource.local.dao.CharacterDao
 import com.example.pagingsample.datasource.local.dao.PassengerDao
 import com.example.pagingsample.datasource.local.dao.RemoteKeyDao
 import com.example.pagingsample.datasource.local.dao.base.BaseDao
+import com.example.pagingsample.datasource.local.dao.base.BaseGetPagingSourceDao
 import com.example.pagingsample.model.local.Passenger
 import com.example.pagingsample.model.local.character.Character
 import dagger.Component
@@ -17,6 +18,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Singleton
 
@@ -38,9 +40,8 @@ object DatabaseModule {
     @Provides
     fun provideTransactionManager(appDatabase: AppDatabase): ITransactionManager = appDatabase
 
-    @Singleton
     @Provides
-    fun providePagingLoadDispatcher() = Dispatchers.IO
+    fun providePagingLoadDispatcher(): CoroutineDispatcher = Dispatchers.IO
 
     @Singleton
     @Provides
@@ -61,4 +62,12 @@ object DatabaseModule {
     @Singleton
     @Provides
     fun provideBaseDaoPassenger(passengerDao: PassengerDao): BaseDao<Passenger> = passengerDao
+
+    @Singleton
+    @Provides
+    fun provideBaseGetPagingSourceDaoCharacter(characterDao: CharacterDao): BaseGetPagingSourceDao<Character> = characterDao
+
+    @Singleton
+    @Provides
+    fun provideBaseGetPagingSourceDaoPassenger(passengerDao: PassengerDao): BaseGetPagingSourceDao<Passenger> = passengerDao
 }

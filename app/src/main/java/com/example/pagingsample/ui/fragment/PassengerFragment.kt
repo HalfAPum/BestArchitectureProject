@@ -1,6 +1,7 @@
 package com.example.pagingsample.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pagingsample.R
 import com.example.pagingsample.ui.adapter.PassengersPagingAdapter
+import com.example.pagingsample.ui.launchSubscribeFlow
 import com.example.pagingsample.ui.subscribeFlow
 import com.example.pagingsample.viewmodel.AirlineViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,7 +36,7 @@ class PassengerFragment : Fragment() {
         val adapter = PassengersPagingAdapter()
         recycler_view.adapter = adapter
 
-        subscribeFlow {
+        launchSubscribeFlow {
             viewModel.subscribePassengers().collectLatest {
                 adapter.submitData(it)
             }

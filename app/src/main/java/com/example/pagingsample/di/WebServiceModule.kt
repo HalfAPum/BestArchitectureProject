@@ -72,9 +72,9 @@ object WebServiceModule {
         @Named(RICK_AND_MORTY_RETROFIT) retrofit: Retrofit
     ): RickAndMortyApi = retrofit.create(RickAndMortyApi::class.java)
 
-    const val AIRLINE_BASE_URL = "https://api.instantwebtools.net/v1/"
-    const val RICK_AND_MORTY_BASE_URL = "https://rickandmortyapi.com/api/"
+    private const val AIRLINE_BASE_URL = "https://api.instantwebtools.net/v1/"
+    private const val RICK_AND_MORTY_BASE_URL = "https://rickandmortyapi.com/api/"
 
-    const val AIRLINE_RETROFIT = "AIRLINE RETROFIT"
-    const val RICK_AND_MORTY_RETROFIT = "RICK AND MORTY RETROFIT"
+    private const val AIRLINE_RETROFIT = "AIRLINE RETROFIT"
+    private const val RICK_AND_MORTY_RETROFIT = "RICK AND MORTY RETROFIT"
 }

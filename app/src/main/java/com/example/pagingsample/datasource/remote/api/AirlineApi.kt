@@ -9,13 +9,13 @@ interface AirlineApi {
     @GET("passenger")
     suspend fun getPassengersPaging(
         @Query("page") page: Int,
-        @Query("size") size: Int,
+        @Query("size") size: Int = PASSENGERS_LOAD_SIZE,
     ): PassengersResponse
 
     companion object {
 
         const val PASSENGERS_PAGING_START = 0
-        const val PASSENGERS_LOAD_SIZE = 10
+        const val PASSENGERS_LOAD_SIZE = 20
         const val PASSENGERS_INITIAL_LOAD_SIZE = PASSENGERS_LOAD_SIZE * 3
     }
 }

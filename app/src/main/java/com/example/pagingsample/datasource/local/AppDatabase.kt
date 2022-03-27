@@ -2,6 +2,7 @@ package com.example.pagingsample.datasource.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import androidx.room.withTransaction
 import com.example.pagingsample.datasource.local.dao.CharacterDao
 import com.example.pagingsample.datasource.local.dao.PassengerDao
 import com.example.pagingsample.datasource.local.dao.RemoteKeyDao
@@ -28,12 +29,8 @@ abstract class AppDatabase : RoomDatabase(), ITransactionManager {
     abstract fun characterDao(): CharacterDao
 
     override suspend fun runInTransaction(action: SuspendVoidCallback) {
-        beginTransaction()
-        try {
+        withTransaction {
             action.invoke()
-            setTransactionSuccessful()
-        } finally {
-            endTransaction()
         }
     }
 

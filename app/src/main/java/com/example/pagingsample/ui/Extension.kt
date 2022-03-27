@@ -8,10 +8,20 @@ import com.example.pagingsample.utils.SuspendVoidCallback
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-fun LifecycleOwner.subscribeFlow(block: SuspendVoidCallback) {
+/**
+ * Implied to use inside [LifecycleOwner].
+ */
+fun LifecycleOwner.launchSubscribeFlow(block: SuspendVoidCallback) {
     lifecycleScope.launch {
-        repeatOnLifecycle(Lifecycle.State.STARTED) {
-            block.invoke()
-        }
+        subscribeFlow(block)
+    }
+}
+
+/**
+ * Implied to use inside [CoroutineScope] and [LifecycleOwner].
+ */
+suspend fun LifecycleOwner.subscribeFlow(block: SuspendVoidCallback) {
+    repeatOnLifecycle(Lifecycle.State.STARTED) {
+        block.invoke()
     }
 }

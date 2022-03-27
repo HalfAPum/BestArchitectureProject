@@ -11,4 +11,5 @@ sealed class LoadTypeResult {
     class MediatorSuccessResult(
         val success: RemoteMediator.MediatorResult.Success
     ): LoadTypeResult()
+
 }

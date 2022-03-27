@@ -4,11 +4,18 @@ import com.example.pagingsample.model.local.Passenger
 import com.example.pagingsample.model.local.character.Character
 import com.example.pagingsample.model.local.character.CharacterLocation
 
+fun PassengersResponse.map() = passengerNetworkList.toPassengerList()
+
+fun List<PassengerNetwork>.toPassengerList() = map { it.toPassenger()}
+
 fun PassengerNetwork.toPassenger(): Passenger {
     return Passenger(id, name, trips)
 }
 
-fun List<PassengerNetwork>.toPassengerList() = map { it.toPassenger()}
+
+fun CharacterResponse.map() = characters.toCharacterList()
+
+fun List<CharacterNetwork>.toCharacterList() = map { it.toCharacter()}
 
 fun CharacterNetwork.toCharacter(): Character {
     return Character(id.toString(), name, status, species, type, gender,
@@ -18,5 +25,3 @@ fun CharacterNetwork.toCharacter(): Character {
 fun CharacterLocationNetwork.toCharacterLocation(): CharacterLocation {
     return CharacterLocation(name, url)
 }
-
-fun List<CharacterNetwork>.toCharacterList() = map { it.toCharacter()}

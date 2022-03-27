@@ -4,12 +4,11 @@ import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Query
 import com.example.pagingsample.datasource.local.dao.base.BaseDao
-import com.example.pagingsample.datasource.local.dao.base.BaseLoadAllDao
+import com.example.pagingsample.datasource.local.dao.base.BaseGetPagingSourceDao
 import com.example.pagingsample.model.local.Passenger
-import com.example.pagingsample.model.local.character.Character
 
 @Dao
-interface PassengerDao : BaseDao<Passenger>, BaseLoadAllDao<Passenger> {
+interface PassengerDao : BaseDao<Passenger>, BaseGetPagingSourceDao<Passenger> {
 
     @Query("DELETE FROM Passenger")
     @JvmSuppressWildcards
@@ -17,6 +16,6 @@ interface PassengerDao : BaseDao<Passenger>, BaseLoadAllDao<Passenger> {
 
     @Query("SELECT * FROM Passenger")
     @JvmSuppressWildcards
-    override fun getAll(): PagingSource<Int, Passenger>
+    override fun getPagingSource(): PagingSource<Int, Passenger>
 
 }

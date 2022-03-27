@@ -11,7 +11,7 @@ class IdentifiableDiffUtil<T>: DiffUtil.ItemCallback<T>() where T : Identifiable
     }
 
     /**
-     * Compare items using equals. If object doesn't override it, then exception will be thrown
+     * Compare items using equals. If object doesn't override it, then exception will be thrown.
      */
     @SuppressLint("DiffUtilEquals")
     override fun areContentsTheSame(oldItem: T, newItem: T): Boolean {

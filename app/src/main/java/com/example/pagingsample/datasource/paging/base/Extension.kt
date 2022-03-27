@@ -1,9 +1,8 @@
-package com.example.pagingsample.datasource.paging
+package com.example.pagingsample.datasource.paging.base
 
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator.MediatorResult
-import com.example.pagingsample.datasource.paging.base.LoadTypeResult
 import okio.IOException
 import retrofit2.HttpException
 
@@ -18,11 +17,13 @@ suspend fun runPagingCatchingException(block: suspend () -> MediatorResult): Med
     }
 }
 
+
 val Int.nextKey: Int
     get() = this + 1
 
 val Int.prevKey: Int
     get() = this - 1
+
 
 fun <T : Any> PagingState<Int, T>.findFirstLoadedItem() =
     pages.find { it.data.isNotEmpty() }?.data?.firstOrNull()
@@ -32,6 +33,7 @@ fun <T : Any> PagingState<Int, T>.findLastLoadedItem() =
 
 fun <T : Any> PagingState<Int, T>.findClosestItemToCurrentPosition() =
     anchorPosition?.let { position -> closestItemToPosition(position) }
+
 
 fun PageResult(page: Int) = LoadTypeResult.PageResult(page)
 

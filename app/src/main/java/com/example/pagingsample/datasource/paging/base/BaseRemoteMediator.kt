@@ -1,17 +1,15 @@
 package com.example.pagingsample.datasource.paging.base
 
-import android.util.Log
 import androidx.annotation.WorkerThread
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import com.example.pagingsample.datasource.local.dao.RemoteKeyDao
-import com.example.pagingsample.datasource.local.helper.base.CleanerDaoHelper
-import com.example.pagingsample.datasource.local.helper.base.SaveItemWithRemoteKeysDaoHelper
-import com.example.pagingsample.datasource.paging.*
+import com.example.pagingsample.datasource.local.helper.ClearAllItemsAndKeysDaoHelper
+import com.example.pagingsample.datasource.local.helper.SaveItemsWithRemoteKeysDaoHelper
+import com.example.pagingsample.datasource.remote.helper.base.PagingApiHelper
 import com.example.pagingsample.model.local.RemoteKey
-import com.example.pagingsample.model.local.character.Character
 import com.example.pagingsample.model.local.interfaces.Identifiable
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -19,13 +17,22 @@ import kotlinx.coroutines.withContext
 
 @OptIn(ExperimentalPagingApi::class)
 abstract class BaseRemoteMediator<T : Identifiable> constructor(
-    private val saveDataDaoHelper: SaveItemWithRemoteKeysDaoHelper<T>,
+    private val saveDataWithRemoteKeysDaoHelper: SaveItemsWithRemoteKeysDaoHelper<T>,
     private val remoteKeyDao: RemoteKeyDao,
-    private val cleanerDaoHelper: CleanerDaoHelper,
+    private val cleanerDaoHelper: ClearAllItemsAndKeysDaoHelper<T>,
+    private val pagingApiHelper: PagingApiHelper<*, T>,
     private val loadDispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) : RemoteMediator<Int, T>() {
 
+    /**
+     * Start page for paging(Some API's have different start page).
+     */
     abstract val startPage: Int
+
+    /**
+     * Main parameter for calculating end of pagination.
+     */
+    abstract val requestedLoadSize: Int
 
     override suspend fun load(
         loadType: LoadType,
@@ -40,15 +47,16 @@ abstract class BaseRemoteMediator<T : Identifiable> constructor(
             }
         }
 
-        if (loadType == LoadType.REFRESH) {
-            cleanerDaoHelper.clear()
+        runPagingCatchingException {
+            val data = loadDataFromServer(page)
+            data.saveToCache(page)
         }
-
-        loadNewData(page, state)
     }
 
     /**
      * Converts paging [LoadType] to [LoadTypeResult].
+     * If there is page to load returns [LoadTypeResult.PageResult] with [LoadTypeResult.PageResult.page]
+     * otherwise returns [LoadTypeResult.MediatorSuccessResult] with [RemoteMediator.MediatorResult.Success].
      */
     @WorkerThread
     private suspend fun handleLoadType(
@@ -56,20 +64,19 @@ abstract class BaseRemoteMediator<T : Identifiable> constructor(
         state: PagingState<Int, T>
     ): LoadTypeResult = when (loadType) {
         LoadType.REFRESH -> {
-            Log.d("tag1", "REFTESH")
+            //Clear needed tables if this is new load
+            cleanerDaoHelper.clearTables()
+
+            //Calculate page
             val remoteKey = state.getClosestRemoteKeyForCurrentPosition()
             val position = remoteKey?.nextKey?.minus(1) ?: startPage
             PageResult(position)
         }
         LoadType.PREPEND -> {
-            Log.d("tag1", "PREPEND")
-
             val remoteKey = state.getRemoteKeyFromFirstLoadedPage()
             remoteKey?.prevKey.getLoadTypeResult(remoteKey)
         }
         LoadType.APPEND -> {
-            Log.d("tag1", "APPEBD")
-
             val remoteKey = state.getRemoteKeyFromLastLoadedPage()
             remoteKey?.nextKey.getLoadTypeResult(remoteKey)
         }
@@ -94,7 +101,7 @@ abstract class BaseRemoteMediator<T : Identifiable> constructor(
      */
     @WorkerThread
     private suspend fun getItemRemoteKey(item: Identifiable?) =
-        item?.let { remoteKeyDao.get(it.id) }
+        item?.let { remoteKeyDao.getById(it.id) }
 
 
     private fun Int?.getLoadTypeResult(remoteKey: RemoteKey?): LoadTypeResult {
@@ -104,42 +111,39 @@ abstract class BaseRemoteMediator<T : Identifiable> constructor(
     }
 
     @WorkerThread
-    private suspend fun loadNewData(
+    suspend fun loadDataFromServer(page: Int) = pagingApiHelper.load(page)
+
+    @WorkerThread
+    private suspend fun List<T>.saveToCache(
         page: Int,
-        state: PagingState<Int, T>
-    ) = runPagingCatchingException {
-        val data = loadDataFromServer(page, state)
-        val isEndOfPaginationReached = data.isNullOrEmpty()
+    ): MediatorResult.Success {
+        val isEndOfPaginationReached = calculateEndOfPagination()
 
         val prevKey = getPrevKey(page)
         val nextKey = getNextKey(page, isEndOfPaginationReached)
 
-        val remoteKeys = data.map { RemoteKey(it.id, prevKey, nextKey) }
+        val remoteKeys = map { RemoteKey(it.id, prevKey, nextKey) }
 
-        saveDataToCache(data, remoteKeys)
+        saveDataWithRemoteKeysDaoHelper.save(this, remoteKeys)
 
-        MediatorResult.Success(isEndOfPaginationReached)
+        return MediatorResult.Success(isEndOfPaginationReached)
     }
 
-    @WorkerThread
-    abstract suspend fun loadDataFromServer(
-        page: Int,
-        state: PagingState<Int, T>,
-    ) : List<T>
-
-    @WorkerThread
-    private suspend fun saveDataToCache(
-        data: List<T>,
-        remoteKeys: List<RemoteKey>,
-    ) = saveDataDaoHelper.save(data, remoteKeys)
+    /**
+     * If loaded data is less that requested
+     * then end of pagination is reached.
+     */
+    private fun List<Any>.calculateEndOfPagination(): Boolean {
+        return size < requestedLoadSize
+    }
 
 
-    protected fun getPrevKey(page: Int): Int? {
+    private fun getPrevKey(page: Int): Int? {
         return if (page == startPage) null
         else page.prevKey
     }
 
-    protected fun getNextKey(page: Int, isEndOfPaginationReached: Boolean): Int? {
+    private fun getNextKey(page: Int, isEndOfPaginationReached: Boolean): Int? {
         return if (isEndOfPaginationReached) null
         else page.nextKey
     }
