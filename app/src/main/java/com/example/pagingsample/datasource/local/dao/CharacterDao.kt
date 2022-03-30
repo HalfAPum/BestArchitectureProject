@@ -18,4 +18,8 @@ interface CharacterDao : BaseDao<Character>, BaseGetPagingSourceDao<Character> {
     @JvmSuppressWildcards
     override fun getPagingSource(): PagingSource<Int, Character>
 
+    @Query("SELECT * FROM Character")
+    @JvmSuppressWildcards
+    override suspend fun getAll(): List<Character>
+
 }

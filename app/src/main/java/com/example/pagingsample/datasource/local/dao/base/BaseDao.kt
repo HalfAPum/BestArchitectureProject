@@ -1,6 +1,5 @@
 package com.example.pagingsample.datasource.local.dao.base
 
-import androidx.paging.PagingSource
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.Companion.REPLACE
@@ -30,5 +29,8 @@ interface BaseDao<T : Any> {
 
     @JvmSuppressWildcards
     suspend fun clear()
+
+    @JvmSuppressWildcards
+    suspend fun getAll(): List<T>
 
 }

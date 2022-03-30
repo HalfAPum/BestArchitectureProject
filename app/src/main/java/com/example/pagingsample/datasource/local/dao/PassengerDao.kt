@@ -18,4 +18,8 @@ interface PassengerDao : BaseDao<Passenger>, BaseGetPagingSourceDao<Passenger> {
     @JvmSuppressWildcards
     override fun getPagingSource(): PagingSource<Int, Passenger>
 
+    @Query("SELECT * FROM Passenger")
+    @JvmSuppressWildcards
+    override suspend fun getAll(): List<Passenger>
+
 }

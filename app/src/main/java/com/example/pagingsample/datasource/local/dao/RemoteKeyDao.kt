@@ -15,4 +15,8 @@ interface RemoteKeyDao : BaseDao<RemoteKey> {
     @Query("SELECT * FROM RemoteKey WHERE id = :id")
     suspend fun getById(id: String): RemoteKey
 
+    @Query("SELECT * FROM RemoteKey")
+    @JvmSuppressWildcards
+    override suspend fun getAll(): List<RemoteKey>
+
 }
