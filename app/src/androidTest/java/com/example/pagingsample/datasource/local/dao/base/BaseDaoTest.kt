@@ -12,17 +12,10 @@ import org.junit.Before
 import org.junit.Test
 
 @OptIn(ExperimentalCoroutinesApi::class)
-abstract class BaseDaoTest<T : Any> {
+abstract class BaseDaoTest<T : Any, D : BaseDao<T>> : IBaseDaoTest<T, D> {
 
-    /**
-     * Data for tests.
-     * [itemList] should not contain [singleItem].
-     */
-    abstract val singleItem: T
-    abstract val itemList: List<T>
-
-    protected lateinit var db: AppDatabase
-    protected lateinit var dao: BaseDao<T>
+    override lateinit var dao: D
+    override lateinit var db: AppDatabase
 
     @Before
     @CallSuper
@@ -31,6 +24,7 @@ abstract class BaseDaoTest<T : Any> {
             ApplicationProvider.getApplicationContext(),
             AppDatabase::class.java,
         ).build()
+
         initDao()
     }
 
@@ -58,19 +52,17 @@ abstract class BaseDaoTest<T : Any> {
      * Validate [Insert] functions tests.
      */
     @Test
-    fun insertSingleItem() = runTest {
-        dao.insert(singleItem)
-        val result = dao.getAll()
+    fun testInsertItem() = runTest {
+        insertSingleItem()
 
-        assertThat(singleItem).isEqualTo(result.first())
+        assertThat(getResult().first()).isEqualTo(singleItem)
     }
 
     @Test
-    fun insertItems() = runTest {
-        dao.insert(itemList)
-        val result = dao.getAll()
+    fun testInsertItemsTest() = runTest {
+        insertItemList(itemList)
 
-        assertThat(itemList).isEqualTo(result)
+        assertThat(getResult()).isEqualTo(itemList)
     }
 
     /**
@@ -80,12 +72,11 @@ abstract class BaseDaoTest<T : Any> {
      */
     @Test
     fun checkInsertOnReplaceStrategy() = runTest {
-        dao.insert(singleItem)
+        insertSingleItem(singleItem)
         val transformedItem = singleItem.transform()
-        dao.insert(transformedItem)
-        val result = dao.getAll().first()
+        insertSingleItem(transformedItem)
 
-        assertThat(result).isEqualTo(transformedItem)
+        assertThat(getResult().first()).isEqualTo(transformedItem)
     }
 
     /**
@@ -96,7 +87,7 @@ abstract class BaseDaoTest<T : Any> {
     @Test
     fun checkTransformedItemIsNotTheSameItem() {
         val transformedItem = singleItem.transform()
-        assertThat(singleItem).isNotEqualTo(transformedItem)
+        assertThat(transformedItem).isNotEqualTo(singleItem)
     }
 
     /**
@@ -105,39 +96,35 @@ abstract class BaseDaoTest<T : Any> {
 
     @Test
     fun updateSingleItem() = runTest {
-        dao.insert(singleItem)
+        insertSingleItem(singleItem)
         val transformedItem = singleItem.transform()
         dao.update(transformedItem)
-        val result = dao.getAll()
 
-        assertThat(result.first()).isEqualTo(transformedItem)
+        assertThat(getResult().first()).isEqualTo(transformedItem)
     }
 
     @Test
     fun updateItems() = runTest {
-        dao.insert(itemList)
+        insertItemList(itemList)
         val transformedList = itemList.map { it.transform() }
         dao.update(transformedList)
-        val result = dao.getAll()
 
-        assertThat(result).isEqualTo(transformedList)
+        assertThat(getResult()).isEqualTo(transformedList)
     }
 
     @Test
     fun updateSameItem() = runTest {
-        dao.insert(itemList)
+        insertItemList(itemList)
         dao.update(itemList)
-        val result = dao.getAll()
 
-        assertThat(result).isEqualTo(itemList)
+        assertThat(getResult()).isEqualTo(itemList)
     }
 
-    @Test()
+    @Test
     fun updateNotExistingItem()= runTest {
         dao.update(singleItem)
-        val result = dao.getAll()
 
-        assertThat(result).isEmpty()
+        assertThat(getResult()).isEmpty()
     }
 
     /**
@@ -146,45 +133,40 @@ abstract class BaseDaoTest<T : Any> {
 
     @Test
     fun deleteItem() = runTest {
-        dao.insert(itemList)
+        insertSingleItem(singleItem)
         dao.delete(singleItem)
-        val result = dao.getAll()
 
-        assertThat(result).doesNotContain(singleItem)
+        assertThat(getResult()).doesNotContain(singleItem)
     }
 
     @Test
     fun deleteItems() = runTest {
-        dao.insert(itemList)
+        insertItemList(itemList)
         dao.delete(itemList)
-        val result = dao.getAll()
 
-        assertThat(result).isEmpty()
+        assertThat(getResult()).isEmpty()
     }
 
     @Test
     fun deleteNotExistingItem() = runTest {
         dao.delete(singleItem)
-        val result = dao.getAll()
 
-        assertThat(result).isEmpty()
+        assertThat(getResult()).isEmpty()
     }
 
     @Test
     fun clearAll() = runTest {
-        dao.insert(itemList)
+        insertItemList()
         dao.clear()
-        val result = dao.getAll()
 
-        assertThat(result).isEmpty()
+        assertThat(getResult()).isEmpty()
     }
 
     @Test
     fun clearEmptyTable() = runTest {
         dao.clear()
-        val result = dao.getAll()
 
-        assertThat(result).isEmpty()
+        assertThat(getResult()).isEmpty()
     }
 
     companion object {

@@ -1,5 +1,7 @@
 package com.example.pagingsample.datasource.local.dao
 
+import com.example.pagingsample.model.local.Passenger
+import com.example.pagingsample.model.local.RemoteKey
 import com.example.pagingsample.model.local.character.Character
 import com.example.pagingsample.model.local.character.CharacterLocation
 
@@ -19,6 +21,22 @@ object EmulatedData {
         Character("759","Turkey Morty","Alive","Animal","Turkey",
             "Male", CharacterLocation("Earth (Replacement Dimension)","https://rickandmortyapi.com/api/location/20"),
             "https://rickandmortyapi.com/api/character/avatar/759.jpeg", "2021-10-17T15:01:58.524Z"),
+    )
+
+    val passenger = Passenger("1", "Ivan", 20.0)
+
+    val passengerList = listOf(
+        Passenger("2", "Alex", 160.0),
+        Passenger("3", "Misha", 1.0),
+        Passenger("4", "Sasha", 14.3),
+    )
+
+    val remoteKey = RemoteKey("1", null, 2)
+
+    val remoteKeyList = listOf(
+        RemoteKey("2", null, 2),
+        RemoteKey("3", null, 2),
+        RemoteKey("4", 1, 3),
     )
 
 }
