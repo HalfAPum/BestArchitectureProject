@@ -1,8 +1,5 @@
 package com.example.pagingsample.di
 
-import android.content.Context
-import androidx.room.Room
-import androidx.room.RoomDatabase
 import com.example.pagingsample.datasource.local.AppDatabase
 import com.example.pagingsample.datasource.local.ITransactionManager
 import com.example.pagingsample.datasource.local.dao.CharacterDao
@@ -12,11 +9,9 @@ import com.example.pagingsample.datasource.local.dao.base.BaseDao
 import com.example.pagingsample.datasource.local.dao.base.BaseGetPagingSourceDao
 import com.example.pagingsample.model.local.Passenger
 import com.example.pagingsample.model.local.character.Character
-import dagger.Component
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -25,16 +20,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {
-
-    @Singleton
-    @Provides
-    fun provideRoomDb(@ApplicationContext applicationContext: Context): AppDatabase {
-        return Room.databaseBuilder(
-            applicationContext,
-            AppDatabase::class.java,
-            "MyDatabase"
-        ).fallbackToDestructiveMigration().build()
-    }
 
     @Singleton
     @Provides

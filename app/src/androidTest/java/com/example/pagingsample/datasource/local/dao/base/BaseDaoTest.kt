@@ -1,52 +1,24 @@
 package com.example.pagingsample.datasource.local.dao.base
 
-import androidx.annotation.CallSuper
-import androidx.room.*
-import androidx.test.core.app.ApplicationProvider
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Update
 import com.example.pagingsample.datasource.local.AppDatabase
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
-import org.junit.After
-import org.junit.Before
 import org.junit.Test
+import javax.inject.Inject
 
 @OptIn(ExperimentalCoroutinesApi::class)
 abstract class BaseDaoTest<T : Any, D : BaseDao<T>> : IBaseDaoTest<T, D> {
 
+    @Inject
     override lateinit var dao: D
+
+    @Inject
     override lateinit var db: AppDatabase
-
-    @Before
-    @CallSuper
-    fun setup() {
-        db = Room.inMemoryDatabaseBuilder(
-            ApplicationProvider.getApplicationContext(),
-            AppDatabase::class.java,
-        ).build()
-
-        initDao()
-    }
-
-    abstract fun initDao()
-
-    @After
-    @CallSuper
-    fun teardown() = db.close()
-
-    /**
-     * Validate test data tests.
-     */
-    @Test
-    fun checkItemListDoesNotContainSingleItem() {
-        assertThat(itemList).doesNotContain(singleItem)
-    }
-
-    @Test
-    fun checkItemListSize() {
-        assertThat(itemList.size > MINIMAL_TEST_LIST_SIZE).isTrue()
-    }
-
 
     /**
      * Validate [Insert] functions tests.
@@ -77,17 +49,6 @@ abstract class BaseDaoTest<T : Any, D : BaseDao<T>> : IBaseDaoTest<T, D> {
         insertSingleItem(transformedItem)
 
         assertThat(getResult().first()).isEqualTo(transformedItem)
-    }
-
-    /**
-     * Input and result [T] should be different with same PK.
-     */
-    abstract fun T.transform() : T
-
-    @Test
-    fun checkTransformedItemIsNotTheSameItem() {
-        val transformedItem = singleItem.transform()
-        assertThat(transformedItem).isNotEqualTo(singleItem)
     }
 
     /**
@@ -167,10 +128,6 @@ abstract class BaseDaoTest<T : Any, D : BaseDao<T>> : IBaseDaoTest<T, D> {
         dao.clear()
 
         assertThat(getResult()).isEmpty()
-    }
-
-    companion object {
-        private const val MINIMAL_TEST_LIST_SIZE = 2
     }
 
 }

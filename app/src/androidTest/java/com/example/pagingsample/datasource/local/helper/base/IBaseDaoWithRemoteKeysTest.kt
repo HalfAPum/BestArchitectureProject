@@ -1,6 +1,5 @@
 package com.example.pagingsample.datasource.local.helper.base
 
-import com.example.pagingsample.datasource.local.ITransactionManager
 import com.example.pagingsample.datasource.local.dao.EmulatedData
 import com.example.pagingsample.datasource.local.dao.RemoteKeyDao
 import com.example.pagingsample.datasource.local.dao.base.BaseDao
@@ -20,9 +19,6 @@ interface IBaseDaoWithRemoteKeysTest<T : Any, D : BaseDao<T>> : IBaseDaoTest<T, 
         get() = EmulatedData.remoteKeyList
 
     var remoteKeyDao: RemoteKeyDao
-    val transactionManager: ITransactionManager
-        get() = db
-
 
     fun saveItemsWithRemoteKeys(
         inputItemList: List<T>,
