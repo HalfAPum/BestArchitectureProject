@@ -15,10 +15,32 @@ class SaveItemsWithRemoteKeysDaoHelper<T : Any> @Inject constructor(
 ) {
 
     suspend fun save(items: List<T>, remoteKeys: List<RemoteKey>) {
+        validateInput(items, remoteKeys)
+
         transactionManager.runInTransaction {
-            itemDao.insert(items)
-            remoteKeyDao.insert(remoteKeys)
+            itemDao.insertItems(items)
+            remoteKeyDao.insertItems(remoteKeys)
         }
+    }
+
+    /**
+     * Ensure that we save [RemoteKey] for all [T].
+     */
+    private fun validateInput(
+        items: List<T>,
+        remoteKeys: List<RemoteKey>
+    ) = when {
+        items.isNullOrEmpty() -> {
+            throw IllegalArgumentException("""
+                Item list must not be null or empty.
+            """.trimIndent())
+        }
+        items.size != remoteKeys.size -> {
+            throw IllegalArgumentException("""
+                Remote key list must have save size as item list.
+            """.trimIndent())
+        }
+        else -> null
     }
 
 }

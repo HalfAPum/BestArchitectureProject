@@ -1,4 +1,4 @@
-package com.example.pagingsample
+package com.example.pagingsample.utils
 
 import com.example.pagingsample.model.local.Passenger
 import com.example.pagingsample.model.local.RemoteKey

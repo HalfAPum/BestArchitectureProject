@@ -1,12 +1,12 @@
 package com.example.pagingsample.datasource.local.helper.base
 
-import com.example.pagingsample.EmulatedData
 import com.example.pagingsample.datasource.local.dao.RemoteKeyDao
 import com.example.pagingsample.datasource.local.dao.base.BaseDao
 import com.example.pagingsample.datasource.local.dao.base.IBaseDaoTest
 import com.example.pagingsample.datasource.local.helper.ClearAllItemsAndKeysDaoHelper
 import com.example.pagingsample.datasource.local.helper.SaveItemsWithRemoteKeysDaoHelper
 import com.example.pagingsample.model.local.RemoteKey
+import com.example.pagingsample.utils.EmulatedData
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest

@@ -52,7 +52,7 @@ interface IBaseDaoTest<T, D : BaseDao<T>> : DatabaseTest, HiltTest {
     }
 
     suspend fun insertItemList(items: List<T> = itemList) {
-        dao.insert(items)
+        dao.insertItems(items)
     }
 
     suspend fun getResult() = dao.getAll()
