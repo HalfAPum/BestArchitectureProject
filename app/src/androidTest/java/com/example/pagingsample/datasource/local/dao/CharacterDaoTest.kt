@@ -2,6 +2,7 @@ package com.example.pagingsample.datasource.local.dao
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
+import com.example.pagingsample.EmulatedData
 import com.example.pagingsample.datasource.local.dao.base.BaseDaoWithRemoteKeysTest
 import com.example.pagingsample.model.local.character.Character
 import dagger.hilt.android.testing.HiltAndroidTest

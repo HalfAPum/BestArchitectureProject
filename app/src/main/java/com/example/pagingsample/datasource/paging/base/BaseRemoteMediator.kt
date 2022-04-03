@@ -29,11 +29,6 @@ abstract class BaseRemoteMediator<T : Identifiable> constructor(
      */
     abstract val startPage: Int
 
-    /**
-     * Main parameter for calculating end of pagination.
-     */
-    abstract val requestedLoadSize: Int
-
     override suspend fun load(
         loadType: LoadType,
         state: PagingState<Int, T>
@@ -130,11 +125,10 @@ abstract class BaseRemoteMediator<T : Identifiable> constructor(
     }
 
     /**
-     * If loaded data is less that requested
-     * then end of pagination is reached.
+     * If no data is loaded then end of pagination is reached.
      */
     private fun List<Any>.calculateEndOfPagination(): Boolean {
-        return size < requestedLoadSize
+        return isNullOrEmpty()
     }
 
 

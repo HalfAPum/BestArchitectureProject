@@ -1,6 +1,6 @@
 package com.example.pagingsample.datasource.local.helper.base
 
-import com.example.pagingsample.datasource.local.dao.EmulatedData
+import com.example.pagingsample.EmulatedData
 import com.example.pagingsample.datasource.local.dao.RemoteKeyDao
 import com.example.pagingsample.datasource.local.dao.base.BaseDao
 import com.example.pagingsample.datasource.local.dao.base.IBaseDaoTest

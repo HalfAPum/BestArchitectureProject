@@ -27,6 +27,5 @@ class CharacterRemoteMediator @Inject constructor(
 ) {
 
     override val startPage: Int = RickAndMortyApi.CHARACTERS_PAGING_START
-    override val requestedLoadSize: Int = RickAndMortyApi.CHARACTERS_LOAD_SIZE
 
 }

@@ -1,4 +1,4 @@
-package com.example.pagingsample.datasource.local.dao
+package com.example.pagingsample
 
 import com.example.pagingsample.model.local.Passenger
 import com.example.pagingsample.model.local.RemoteKey

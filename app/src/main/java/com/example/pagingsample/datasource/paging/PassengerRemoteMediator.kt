@@ -1,13 +1,12 @@
 package com.example.pagingsample.datasource.paging
 
-import androidx.paging.*
+import androidx.paging.ExperimentalPagingApi
 import com.example.pagingsample.datasource.local.dao.RemoteKeyDao
 import com.example.pagingsample.datasource.local.helper.ClearAllItemsAndKeysDaoHelper
 import com.example.pagingsample.datasource.local.helper.SaveItemsWithRemoteKeysDaoHelper
 import com.example.pagingsample.datasource.paging.base.BaseRemoteMediator
 import com.example.pagingsample.datasource.remote.api.AirlineApi
 import com.example.pagingsample.datasource.remote.helper.PassengerPagingApiHelper
-import com.example.pagingsample.model.api.toPassengerList
 import com.example.pagingsample.model.local.Passenger
 import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Inject
@@ -28,6 +27,5 @@ class PassengerRemoteMediator @Inject constructor(
 ) {
 
     override val startPage: Int = AirlineApi.PASSENGERS_PAGING_START
-    override val requestedLoadSize: Int = AirlineApi.PASSENGERS_LOAD_SIZE
 
 }
