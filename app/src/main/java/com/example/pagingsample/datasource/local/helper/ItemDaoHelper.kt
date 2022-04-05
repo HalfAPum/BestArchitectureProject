@@ -8,14 +8,15 @@ import com.example.pagingsample.datasource.local.dao.base.BaseGetPagingSourceDao
 import com.example.pagingsample.model.local.RemoteKey
 import javax.inject.Inject
 
-class SaveItemsWithRemoteKeysDaoHelper<T : Any> @Inject constructor(
+//Todo remove open or provide interface or put up with it
+open class SaveItemsWithRemoteKeysDaoHelper<T : Any> @Inject constructor(
     private val itemDao: BaseDao<T>,
     private val remoteKeyDao: RemoteKeyDao,
     private val transactionManager: ITransactionManager,
 ) {
 
     suspend fun save(items: List<T>, remoteKeys: List<RemoteKey>) {
-        validateInput(items, remoteKeys)
+//        validateInput(items, remoteKeys)
 
         transactionManager.runInTransaction {
             itemDao.insertItems(items)
@@ -30,11 +31,6 @@ class SaveItemsWithRemoteKeysDaoHelper<T : Any> @Inject constructor(
         items: List<T>,
         remoteKeys: List<RemoteKey>
     ) = when {
-        items.isNullOrEmpty() -> {
-            throw IllegalArgumentException("""
-                Item list must not be null or empty.
-            """.trimIndent())
-        }
         items.size != remoteKeys.size -> {
             throw IllegalArgumentException("""
                 Remote key list must have save size as item list.
@@ -45,7 +41,7 @@ class SaveItemsWithRemoteKeysDaoHelper<T : Any> @Inject constructor(
 
 }
 
-class ClearAllItemsAndKeysDaoHelper<T : Any> @Inject constructor(
+open class ClearAllItemsAndKeysDaoHelper<T : Any> @Inject constructor(
     private val itemDao: BaseDao<T>,
     private val remoteKeyDao: RemoteKeyDao,
     private val transactionManager: ITransactionManager,

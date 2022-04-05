@@ -64,7 +64,7 @@ abstract class BaseRemoteMediator<T : Identifiable> constructor(
 
             //Calculate page
             val remoteKey = state.getClosestRemoteKeyForCurrentPosition()
-            val position = remoteKey?.nextKey?.minus(1) ?: startPage
+            val position = remoteKey?.nextKey?.prevKey ?: startPage
             PageResult(position)
         }
         LoadType.PREPEND -> {

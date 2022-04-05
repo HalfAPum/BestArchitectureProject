@@ -12,11 +12,6 @@ fun PassengerNetwork.toPassenger(): Passenger {
     return Passenger(id, name, trips)
 }
 
-fun Passenger.toPassengerNetwork() = PassengerNetwork(id, name, trips, emptyList())
-
-fun List<Passenger>.toPassengerNetworkList() = map { it.toPassengerNetwork()}
-
-
 fun CharacterResponse.map() = characters.toCharacterList()
 
 fun List<CharacterNetwork>.toCharacterList() = map { it.toCharacter()}
@@ -30,11 +25,6 @@ fun CharacterLocationNetwork.toCharacterLocation(): CharacterLocation {
     return CharacterLocation(name, url)
 }
 
-fun Character.toCharacterNetwork() = CharacterNetwork(id.toInt(), name, status, species, type, gender,
-    location.toCharacterLocationNetwork(), image, created)
-
 fun CharacterLocation.toCharacterLocationNetwork(): CharacterLocationNetwork {
     return CharacterLocationNetwork(name, url)
 }
-
-fun List<Character>.toCharacterNetworkList() = map { it.toCharacterNetwork() }
