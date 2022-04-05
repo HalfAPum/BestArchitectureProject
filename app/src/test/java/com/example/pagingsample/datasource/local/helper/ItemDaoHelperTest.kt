@@ -11,6 +11,8 @@ import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito.verify
 import org.mockito.junit.MockitoJUnitRunner
+import org.mockito.kotlin.UseConstructor
+import org.mockito.kotlin.mock
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(MockitoJUnitRunner::class)
@@ -38,10 +40,13 @@ class ItemDaoHelperTest {
         verify(remoteKeyDao).insertItems(remoteKeys)
     }
 
-    @Test(expected = IllegalArgumentException::class)
-    fun `save empty data throws exception`() = runTest {
+    @Test
+    fun `save empty data verify all functions triggered`() = runTest {
         val daoHelper = getSaveItemsWithRemoteKeysDaoHelper()
         daoHelper.save(emptyList(), emptyList())
+
+        verify(itemDao).insertItems(emptyList())
+        verify(remoteKeyDao).insertItems(emptyList())
     }
 
     @Test(expected = IllegalArgumentException::class)
@@ -50,12 +55,10 @@ class ItemDaoHelperTest {
         daoHelper.save(EmulatedData.passengerList, emptyList())
     }
 
-    private fun getSaveItemsWithRemoteKeysDaoHelper() =
-        SaveItemsWithRemoteKeysDaoHelper(
-            itemDao,
-            remoteKeyDao,
-            mockTransactionManager
-        )
+    private fun getSaveItemsWithRemoteKeysDaoHelper() : SaveItemsWithRemoteKeysDaoHelper<Any> =
+        mock(useConstructor = UseConstructor.withArguments(
+            itemDao, remoteKeyDao, mockTransactionManager
+        ))
 
     @Test
     fun `clear item dao and remoteKey dao`() = runTest {
@@ -68,7 +71,9 @@ class ItemDaoHelperTest {
 
     @Test
     fun `get paging source`() = runTest {
-        val pagingDaoHelper = GetPagingSourceDaoHelper(pagingDao)
+        val pagingDaoHelper: GetPagingSourceDaoHelper<Any> = mock(
+            useConstructor = UseConstructor.withArguments(pagingDao)
+        )
         pagingDaoHelper.getPagingSource()
 
         verify(pagingDao).getPagingSource()

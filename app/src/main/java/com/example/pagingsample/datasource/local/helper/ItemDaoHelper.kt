@@ -16,7 +16,7 @@ open class SaveItemsWithRemoteKeysDaoHelper<T : Any> @Inject constructor(
 ) {
 
     suspend fun save(items: List<T>, remoteKeys: List<RemoteKey>) {
-//        validateInput(items, remoteKeys)
+        validateInput(items, remoteKeys)
 
         transactionManager.runInTransaction {
             itemDao.insertItems(items)
@@ -56,7 +56,7 @@ open class ClearAllItemsAndKeysDaoHelper<T : Any> @Inject constructor(
 
 }
 
-class GetPagingSourceDaoHelper<T : Any> @Inject constructor(
+open class GetPagingSourceDaoHelper<T : Any> @Inject constructor(
     private val itemDao: BaseGetPagingSourceDao<T>,
 ) {
 
