@@ -6,7 +6,7 @@ import com.example.pagingsample.utils.SuspendVoidCallback
 open class MockTransactionManager : ITransactionManager {
 
     /**
-     * Dummy implementation of [runInTransaction].
+     * Dummy implementation [runInTransaction].
      */
     override suspend fun runInTransaction(
         action: SuspendVoidCallback

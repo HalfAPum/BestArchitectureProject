@@ -41,7 +41,7 @@ class ExtensionTest {
     }
 
     @Test(expected = Exception::class)
-    fun `runPagingCatchingException with general Exception that shouldn't be catched`() = runTest {
+    fun `runPagingCatchingException with general Exception that shouldn't be caught`() = runTest {
         runPagingCatchingException {
             throw Exception("""Some other exception that 
                 |runPagingCatchingException doesn't catch""".trimMargin())
