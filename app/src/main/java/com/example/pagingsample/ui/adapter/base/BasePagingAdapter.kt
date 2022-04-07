@@ -4,13 +4,21 @@ import androidx.paging.PagingDataAdapter
 import com.example.pagingsample.model.local.interfaces.Identifiable
 import com.example.pagingsample.ui.diffutil.IdentifiableDiffUtil
 import com.example.pagingsample.ui.viewholder.base.BaseItemViewHolder
+import com.example.pagingsample.utils.TypedVoidCallback
 
 abstract class BasePagingAdapter<T : Identifiable> : PagingDataAdapter<T, BaseItemViewHolder<T>>(
     IdentifiableDiffUtil()
 ) {
 
+    var onItemClick: TypedVoidCallback<T> = {}
+
     override fun onBindViewHolder(holder: BaseItemViewHolder<T>, position: Int) {
-        getItem(position)?.let { holder.update(it) }
+        with(holder) {
+            getItem(position)?.let {
+                update(it)
+                setOnClickListener { onItemClick.invoke(it) }
+            }
+        }
     }
 
 }

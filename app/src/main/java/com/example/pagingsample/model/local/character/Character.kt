@@ -1,12 +1,15 @@
 package com.example.pagingsample.model.local.character
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.pagingsample.model.local.interfaces.Identifiable
+import kotlinx.parcelize.Parcelize
 
 @Entity
+@Parcelize
 data class Character(
     @PrimaryKey
     @ColumnInfo("id")
@@ -27,4 +30,4 @@ data class Character(
     val image: String,
     @ColumnInfo("created")
     val created: String,
-) : Identifiable
+) : Identifiable, Parcelable

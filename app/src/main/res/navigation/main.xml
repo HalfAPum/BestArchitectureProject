@@ -7,12 +7,25 @@
 
   <fragment
     android:id="@+id/characters_dest"
-    android:name="com.example.pagingsample.ui.fragment.CharacterFragment"
+    android:name="com.example.pagingsample.ui.fragment.character.CharacterFragment"
     android:label="fragment_character"
-    tools:layout="@layout/fragment_character" />
+    tools:layout="@layout/fragment_character" >
+    <action
+      android:id="@+id/action_to_details"
+      app:destination="@id/characterDetailsFragment" />
+  </fragment>
   <fragment
     android:id="@+id/passengers_dest"
-    android:name="com.example.pagingsample.ui.fragment.PassengerFragment"
+    android:name="com.example.pagingsample.ui.fragment.passenger.PassengerFragment"
     android:label="fragment_passenger"
     tools:layout="@layout/fragment_passenger" />
+  <fragment
+    android:id="@+id/characterDetailsFragment"
+    android:name="com.example.pagingsample.ui.fragment.character.CharacterDetailsFragment"
+    android:label="fragment_character_details"
+    tools:layout="@layout/fragment_character_details" >
+    <argument
+      android:name="character"
+      app:argType="com.example.pagingsample.model.local.character.Character" />
+  </fragment>
 </navigation>

@@ -2,6 +2,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+apply plugin: 'kotlin-parcelize'
 
 android {
   compileSdk 31
@@ -95,6 +97,12 @@ dependencies {
 
   //ViewBindingDelegate
   implementation 'com.github.kirich1409:viewbindingpropertydelegate:1.5.3'
+
+  //Timber
+  implementation 'com.jakewharton.timber:timber:5.0.1'
+
+  //Coil
+  implementation("io.coil-kt:coil:2.0.0-rc02")
 
   //Tests
   // Local Unit Tests
