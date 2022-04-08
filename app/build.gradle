@@ -1,9 +1,12 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
-apply plugin: 'dagger.hilt.android.plugin'
-apply plugin: 'androidx.navigation.safeargs.kotlin'
-apply plugin: 'kotlin-parcelize'
+plugins {
+  id("com.android.application")
+  id("com.apollographql.apollo3").version("3.2.1")
+  id("kotlin-android")
+  id("kotlin-kapt")
+  id("dagger.hilt.android.plugin")
+  id("androidx.navigation.safeargs.kotlin")
+  id("kotlin-parcelize")
+}
 
 android {
   compileSdk 31
@@ -86,14 +89,17 @@ dependencies {
   // retrofit
   implementation "com.squareup.retrofit2:retrofit:2.9.0"
   implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+
+  //okhttp
+  implementation 'com.squareup.okhttp3:okhttp:4.9.3'
   implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
 
   //Navigation component
-  implementation("androidx.navigation:navigation-fragment-ktx:2.4.1")
-  implementation("androidx.navigation:navigation-ui-ktx:2.4.1")
+  implementation("androidx.navigation:navigation-fragment-ktx:2.4.2")
+  implementation("androidx.navigation:navigation-ui-ktx:2.4.2")
 
   // Testing Navigation
-  androidTestImplementation("androidx.navigation:navigation-testing:2.4.1")
+  androidTestImplementation("androidx.navigation:navigation-testing:2.4.2")
 
   //ViewBindingDelegate
   implementation 'com.github.kirich1409:viewbindingpropertydelegate:1.5.3'
@@ -103,6 +109,10 @@ dependencies {
 
   //Coil
   implementation("io.coil-kt:coil:2.0.0-rc02")
+
+  //apollo
+  implementation "com.apollographql.apollo3:apollo-runtime:3.2.1"
+  implementation "com.apollographql.apollo:apollo-coroutines-support:3.2.1"
 
   //Tests
   // Local Unit Tests
@@ -122,4 +132,9 @@ dependencies {
   androidTestImplementation("com.google.dagger:hilt-android-testing:2.38.1")
   kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.38.1")
 
+}
+
+apollo {
+  generateKotlinModels.set(true)
+  packageName.set("com.example.pagingsample")
 }
