@@ -3,11 +3,9 @@ package com.example.pagingsample.di
 import com.example.pagingsample.datasource.local.AppDatabase
 import com.example.pagingsample.datasource.local.ITransactionManager
 import com.example.pagingsample.datasource.local.dao.CharacterDao
-import com.example.pagingsample.datasource.local.dao.PassengerDao
 import com.example.pagingsample.datasource.local.dao.RemoteKeyDao
 import com.example.pagingsample.datasource.local.dao.base.BaseDao
 import com.example.pagingsample.datasource.local.dao.base.BaseGetPagingSourceDao
-import com.example.pagingsample.model.local.Passenger
 import com.example.pagingsample.model.local.character.Character
 import dagger.Module
 import dagger.Provides
@@ -25,10 +23,6 @@ object DatabaseModule {
 
     @Singleton
     @Provides
-    fun providePassengerDao(appDatabase: AppDatabase): PassengerDao = appDatabase.passengerDao()
-
-    @Singleton
-    @Provides
     fun provideCharacterDao(appDatabase: AppDatabase): CharacterDao = appDatabase.characterDao()
 
     @Singleton
@@ -41,13 +35,6 @@ object DatabaseModule {
 
     @Singleton
     @Provides
-    fun provideBaseDaoPassenger(passengerDao: PassengerDao): BaseDao<Passenger> = passengerDao
-
-    @Singleton
-    @Provides
     fun provideBaseGetPagingSourceDaoCharacter(characterDao: CharacterDao): BaseGetPagingSourceDao<Character> = characterDao
 
-    @Singleton
-    @Provides
-    fun provideBaseGetPagingSourceDaoPassenger(passengerDao: PassengerDao): BaseGetPagingSourceDao<Passenger> = passengerDao
 }

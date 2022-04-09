@@ -44,6 +44,11 @@ abstract class BaseRemoteMediator<T : Identifiable> constructor(
 
         runPagingCatchingException {
             val data = loadDataFromServer(page)
+
+            if (loadType == LoadType.REFRESH) {
+                cleanerDaoHelper.clearTables()
+            }
+
             data.saveToCache(page)
         }
     }
@@ -59,12 +64,13 @@ abstract class BaseRemoteMediator<T : Identifiable> constructor(
         state: PagingState<Int, T>
     ): LoadTypeResult = when (loadType) {
         LoadType.REFRESH -> {
-            //Clear needed tables if this is new load
-            cleanerDaoHelper.clearTables()
-
             //Calculate page
             val remoteKey = state.getClosestRemoteKeyForCurrentPosition()
             val position = remoteKey?.nextKey?.prevKey ?: startPage
+
+            //Clear needed tables if this is new load
+
+
             PageResult(position)
         }
         LoadType.PREPEND -> {

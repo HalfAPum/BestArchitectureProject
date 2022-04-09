@@ -112,7 +112,6 @@ dependencies {
 
   //apollo
   implementation "com.apollographql.apollo3:apollo-runtime:3.2.1"
-  implementation "com.apollographql.apollo:apollo-coroutines-support:3.2.1"
 
   //Tests
   // Local Unit Tests
@@ -135,6 +134,12 @@ dependencies {
 }
 
 apollo {
-  generateKotlinModels.set(true)
-  packageName.set("com.example.pagingsample")
+
+  // With
+  // Keep schemaFile
+  schemaFile.set(file("src/main/graphql/schema.graphqls"))
+  // explicitly set srcDir
+  srcDir(file("src/main/graphql/"))
+
+  packageName.set("com.example")
 }

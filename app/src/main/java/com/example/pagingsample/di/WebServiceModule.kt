@@ -1,16 +1,12 @@
 package com.example.pagingsample.di
 
-import com.example.pagingsample.datasource.remote.api.AirlineApi
-import com.example.pagingsample.datasource.remote.api.RickAndMortyApi
+import com.apollographql.apollo3.ApolloClient
+import com.apollographql.apollo3.network.okHttpClient
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import okhttp3.logging.HttpLoggingInterceptor.Level
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Named
 import javax.inject.Singleton
 
@@ -20,61 +16,24 @@ object WebServiceModule {
 
     @Singleton
     @Provides
-    fun provideHttpLoggingInterceptor() = HttpLoggingInterceptor().apply {
-        level = Level.BASIC
-    }
-
-    @Singleton
-    @Provides
-    fun provideLoggingOkHttpClient(
-        loggingInterceptor: HttpLoggingInterceptor
+    @Named(OKHTTP_CLIENT)
+    fun provideOkHttpClient(
     ) = OkHttpClient.Builder()
-        .addInterceptor(loggingInterceptor)
         .build()
 
     @Singleton
     @Provides
-    fun provideGsonConverterFactory(): GsonConverterFactory = GsonConverterFactory.create()
-
-    @Singleton
-    @Provides
-    @Named(AIRLINE_RETROFIT)
-    fun provideAirlineRetrofitInstance(
-        loggingOkHttpClient: OkHttpClient,
-        gsonConverterFactory: GsonConverterFactory
-    ): Retrofit = Retrofit.Builder()
-        .baseUrl(AIRLINE_BASE_URL)
-        .client(loggingOkHttpClient)
-        .addConverterFactory(gsonConverterFactory)
+    @Named(RICK_AND_MORTY_APOLLO_CLIENT)
+    fun provideRickAndMortyApolloClient(
+        @Named(OKHTTP_CLIENT) okHttpClient: OkHttpClient
+    ) : ApolloClient = ApolloClient.Builder()
+        .serverUrl(RICK_AND_MORTY_GRAPHQL_BASE_URL)
+        .okHttpClient(okHttpClient)
         .build()
 
-    @Singleton
-    @Provides
-    fun provideAirlineApi(
-        @Named(AIRLINE_RETROFIT) retrofit: Retrofit
-    ): AirlineApi = retrofit.create(AirlineApi::class.java)
+    private const val OKHTTP_CLIENT = "OKHTTP_CLIENT"
 
-    @Singleton
-    @Provides
-    @Named(RICK_AND_MORTY_RETROFIT)
-    fun provideRickAndMortyRetrofitInstance(
-        loggingOkHttpClient: OkHttpClient,
-        gsonConverterFactory: GsonConverterFactory
-    ): Retrofit = Retrofit.Builder()
-        .baseUrl(RICK_AND_MORTY_BASE_URL)
-        .client(loggingOkHttpClient)
-        .addConverterFactory(gsonConverterFactory)
-        .build()
+    private const val RICK_AND_MORTY_GRAPHQL_BASE_URL = "https://rickandmortyapi.com/graphql"
+    const val RICK_AND_MORTY_APOLLO_CLIENT = "RICK_AND_MORTY_GRAPHQL"
 
-    @Singleton
-    @Provides
-    fun provideRickAndMortyApi(
-        @Named(RICK_AND_MORTY_RETROFIT) retrofit: Retrofit
-    ): RickAndMortyApi = retrofit.create(RickAndMortyApi::class.java)
-
-    private const val AIRLINE_BASE_URL = "https://api.instantwebtools.net/v1/"
-    private const val RICK_AND_MORTY_BASE_URL = "https://rickandmortyapi.com/api/"
-
-    private const val AIRLINE_RETROFIT = "AIRLINE RETROFIT"
-    private const val RICK_AND_MORTY_RETROFIT = "RICK AND MORTY RETROFIT"
 }

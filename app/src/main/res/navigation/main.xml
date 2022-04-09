@@ -15,11 +15,6 @@
       app:destination="@id/characterDetailsFragment" />
   </fragment>
   <fragment
-    android:id="@+id/passengers_dest"
-    android:name="com.example.pagingsample.ui.fragment.passenger.PassengerFragment"
-    android:label="fragment_passenger"
-    tools:layout="@layout/fragment_passenger" />
-  <fragment
     android:id="@+id/characterDetailsFragment"
     android:name="com.example.pagingsample.ui.fragment.character.CharacterDetailsFragment"
     android:label="fragment_character_details"

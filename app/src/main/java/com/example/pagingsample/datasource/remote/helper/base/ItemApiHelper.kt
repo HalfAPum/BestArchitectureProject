@@ -13,7 +13,7 @@ package com.example.pagingsample.datasource.remote.helper.base
 abstract class PagingApiHelper<SERVER : Any, RESULT : Any> {
 
     suspend fun load(page: Int): List<RESULT> {
-        return loadFromServer(page).mapServerData()
+        return loadFromServer(page).mapServerData() ?: emptyList()
     }
 
     protected abstract suspend fun loadFromServer(page: Int) : SERVER
@@ -23,6 +23,6 @@ abstract class PagingApiHelper<SERVER : Any, RESULT : Any> {
      * [SERVER] is wrapper of other [List] of objects, so it converts this
      * objects to [RESULT].
      */
-    protected abstract suspend fun SERVER.mapServerData() : List<RESULT>
+    protected abstract suspend fun SERVER.mapServerData() : List<RESULT>?
 
 }
