@@ -1,20 +1,38 @@
 package com.example.pagingsample.utils
 
 import com.example.pagingsample.model.Character
+import com.example.pagingsample.model.Episode
+import com.example.pagingsample.model.Location
 import com.example.pagingsample.model.RemoteKey
 
 object EmulatedData {
 
     val character = Character("70","Concerto")
-//    val character = Character("70","Concerto","Dead","Humanoid","",
-//        "Male", CharacterLocation("unknown",""),"https://rickandmortyapi.com/api/character/avatar/70.jpeg",
-//        "2017-11-30T11:31:41.926Z")
 
     val characterList = listOf(
         Character("815","Punk Rick"),
         Character("354","Toby Matthews"),
         Character("759","Turkey Morty"),
     )
+    val location = Location("70","Concerto")
+
+    val locationList = listOf(
+        Location("815","Punk Rick"),
+        Location("354","Toby Matthews"),
+        Location("759","Turkey Morty"),
+    )
+    val episode = Episode("70","Concerto")
+
+    val episodeList = listOf(
+        Episode("815","Punk Rick"),
+        Episode("354","Toby Matthews"),
+        Episode("759","Turkey Morty"),
+    )
+
+    //    val character = Character("70","Concerto","Dead","Humanoid","",
+//        "Male", CharacterLocation("unknown",""),"https://rickandmortyapi.com/api/character/avatar/70.jpeg",
+//        "2017-11-30T11:31:41.926Z")
+
 //    val characterList = listOf(
 //        Character("815","Punk Rick","Dead","Human","",
 //            "Male", CharacterLocation("Rick's Memories","https://rickandmortyapi.com/api/location/126"),

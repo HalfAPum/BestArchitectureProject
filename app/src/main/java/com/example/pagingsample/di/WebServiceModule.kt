@@ -6,6 +6,7 @@ import com.example.CharactersPagingQuery
 import com.example.EpisodesPagingQuery
 import com.example.LocationsPagingQuery
 import com.example.pagingsample.datasource.remote.api.BaseApi
+import com.example.pagingsample.datasource.remote.helper.IPagingApiHelper
 import com.example.pagingsample.datasource.remote.helper.PagingApiHelper
 import com.example.pagingsample.datasource.remote.mapper.list.CharacterListMapper
 import com.example.pagingsample.datasource.remote.mapper.list.EpisodeListMapper
@@ -43,7 +44,7 @@ object WebServiceModule {
     @Provides
     fun provideCharacterPagingApiHelper(
         baseApi: BaseApi<CharactersPagingQuery.Data>,
-    ) : PagingApiHelper<*, Character> = PagingApiHelper(baseApi, CharacterListMapper)
+    ) : IPagingApiHelper<Character> = PagingApiHelper(baseApi, CharacterListMapper)
 
     @Provides
     fun provideCharacterPagingQuery(): PagingQueryCallback<CharactersPagingQuery.Data> = {
@@ -53,7 +54,7 @@ object WebServiceModule {
     @Provides
     fun provideLocationPagingApiHelper(
         baseApi: BaseApi<LocationsPagingQuery.Data>,
-    ) : PagingApiHelper<*, Location> = PagingApiHelper(baseApi, LocationListMapper)
+    ) : IPagingApiHelper<Location> = PagingApiHelper(baseApi, LocationListMapper)
 
     @Provides
     fun provideLocationPagingQuery(): PagingQueryCallback<LocationsPagingQuery.Data> = {
@@ -63,7 +64,7 @@ object WebServiceModule {
     @Provides
     fun provideEpisodePagingApiHelper(
         baseApi: BaseApi<EpisodesPagingQuery.Data>,
-    ) : PagingApiHelper<*, Episode> = PagingApiHelper(baseApi, EpisodeListMapper)
+    ) : IPagingApiHelper<Episode> = PagingApiHelper(baseApi, EpisodeListMapper)
 
     @Provides
     fun provideEpisodePagingQuery(): PagingQueryCallback<EpisodesPagingQuery.Data> = {

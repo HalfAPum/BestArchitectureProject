@@ -6,7 +6,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class BaseApi<T : Query.Data> @Inject constructor(
+open class BaseApi<T : Query.Data> @Inject constructor(
     private val graphQLExecutor: GraphQLExecutor,
     private val pagingQuery: PagingQueryCallback<T>
 ) : PagingApi<T> {

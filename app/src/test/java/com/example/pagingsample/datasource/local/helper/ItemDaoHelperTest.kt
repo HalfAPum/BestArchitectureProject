@@ -32,7 +32,7 @@ class ItemDaoHelperTest {
     @Test
     fun `save valid items and remoteKeys verify functions usage`() = runTest {
         val daoHelper = getSaveItemsWithRemoteKeysDaoHelper()
-        val items = EmulatedData.passengerList
+        val items = EmulatedData.characterList
         val remoteKeys = EmulatedData.remoteKeyList
         daoHelper.save(items, remoteKeys)
 
@@ -52,7 +52,7 @@ class ItemDaoHelperTest {
     @Test(expected = IllegalArgumentException::class)
     fun `save items and remoteKeys with different data size throws exception`() = runTest {
         val daoHelper = getSaveItemsWithRemoteKeysDaoHelper()
-        daoHelper.save(EmulatedData.passengerList, emptyList())
+        daoHelper.save(EmulatedData.characterList, emptyList())
     }
 
     private fun getSaveItemsWithRemoteKeysDaoHelper() : SaveItemsWithRemoteKeysDaoHelper<Any> =

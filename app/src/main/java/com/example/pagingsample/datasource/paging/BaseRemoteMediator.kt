@@ -8,7 +8,7 @@ import androidx.paging.RemoteMediator
 import com.example.pagingsample.datasource.local.dao.RemoteKeyDao
 import com.example.pagingsample.datasource.local.helper.ClearAllItemsAndKeysDaoHelper
 import com.example.pagingsample.datasource.local.helper.SaveItemsWithRemoteKeysDaoHelper
-import com.example.pagingsample.datasource.remote.helper.PagingApiHelper
+import com.example.pagingsample.datasource.remote.helper.IPagingApiHelper
 import com.example.pagingsample.model.RemoteKey
 import com.example.pagingsample.model.interfaces.Identifiable
 import kotlinx.coroutines.CoroutineDispatcher
@@ -22,7 +22,7 @@ class BaseRemoteMediator<T : Identifiable> @Inject constructor(
     private val saveDataWithRemoteKeysDaoHelper: SaveItemsWithRemoteKeysDaoHelper<T>,
     private val remoteKeyDao: RemoteKeyDao,
     private val cleanerDaoHelper: ClearAllItemsAndKeysDaoHelper<T>,
-    private val pagingApiHelper: PagingApiHelper<*, T>,
+    private val pagingApiHelper: IPagingApiHelper<T>,
     private val loadDispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) : RemoteMediator<Int, T>() {
 

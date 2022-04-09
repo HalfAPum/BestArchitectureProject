@@ -15,15 +15,15 @@ import javax.inject.Inject
  * Type [SERVER] means server result.
  * Type [RESULT] means convenient for app use type.
  */
-class PagingApiHelper<SERVER : Query.Data, RESULT : Any> @Inject constructor(
+open class PagingApiHelper<SERVER : Query.Data, RESULT : Any> @Inject constructor(
     private val baseApi: BaseApi<SERVER>,
     private val mapper: ListMapper<SERVER, RESULT>,
-) {
+) : IPagingApiHelper<RESULT> {
 
-    val pagingStart: Int
+    override val pagingStart: Int
         get() = baseApi.pagingStart
 
-    suspend fun load(page: Int): List<RESULT> {
+    override suspend fun load(page: Int): List<RESULT> {
         return loadFromServer(page).mapServerData()
     }
 

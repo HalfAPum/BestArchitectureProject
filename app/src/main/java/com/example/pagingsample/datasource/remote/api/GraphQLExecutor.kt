@@ -6,7 +6,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class GraphQLExecutor @Inject constructor(
+open class GraphQLExecutor @Inject constructor(
     private val apolloClient: ApolloClient
 ) {
 
