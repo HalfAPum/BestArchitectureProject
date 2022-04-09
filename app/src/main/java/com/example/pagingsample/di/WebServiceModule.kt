@@ -3,10 +3,16 @@ package com.example.pagingsample.di
 import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.network.okHttpClient
 import com.example.CharactersPagingQuery
+import com.example.EpisodesPagingQuery
+import com.example.LocationsPagingQuery
 import com.example.pagingsample.datasource.remote.api.BaseApi
 import com.example.pagingsample.datasource.remote.helper.PagingApiHelper
 import com.example.pagingsample.datasource.remote.mapper.list.CharacterListMapper
-import com.example.pagingsample.model.local.character.Character
+import com.example.pagingsample.datasource.remote.mapper.list.EpisodeListMapper
+import com.example.pagingsample.datasource.remote.mapper.list.LocationListMapper
+import com.example.pagingsample.model.Character
+import com.example.pagingsample.model.Episode
+import com.example.pagingsample.model.Location
 import com.example.pagingsample.utils.PagingQueryCallback
 import dagger.Module
 import dagger.Provides
@@ -42,6 +48,26 @@ object WebServiceModule {
     @Provides
     fun provideCharacterPagingQuery(): PagingQueryCallback<CharactersPagingQuery.Data> = {
         CharactersPagingQuery(it)
+    }
+
+    @Provides
+    fun provideLocationPagingApiHelper(
+        baseApi: BaseApi<LocationsPagingQuery.Data>,
+    ) : PagingApiHelper<*, Location> = PagingApiHelper(baseApi, LocationListMapper)
+
+    @Provides
+    fun provideLocationPagingQuery(): PagingQueryCallback<LocationsPagingQuery.Data> = {
+        LocationsPagingQuery(it)
+    }
+
+    @Provides
+    fun provideEpisodePagingApiHelper(
+        baseApi: BaseApi<EpisodesPagingQuery.Data>,
+    ) : PagingApiHelper<*, Episode> = PagingApiHelper(baseApi, EpisodeListMapper)
+
+    @Provides
+    fun provideEpisodePagingQuery(): PagingQueryCallback<EpisodesPagingQuery.Data> = {
+        EpisodesPagingQuery(it)
     }
 
 

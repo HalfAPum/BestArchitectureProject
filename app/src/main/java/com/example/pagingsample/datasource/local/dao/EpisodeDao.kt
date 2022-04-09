@@ -5,21 +5,21 @@ import androidx.room.Dao
 import androidx.room.Query
 import com.example.pagingsample.datasource.local.dao.base.BaseDao
 import com.example.pagingsample.datasource.local.dao.base.BaseGetPagingSourceDao
-import com.example.pagingsample.model.Character
+import com.example.pagingsample.model.Episode
 
 @Dao
-interface CharacterDao : BaseDao<Character>, BaseGetPagingSourceDao<Character> {
+interface EpisodeDao : BaseDao<Episode>, BaseGetPagingSourceDao<Episode> {
 
-    @Query("DELETE FROM Character")
+    @Query("DELETE FROM Episode")
     @JvmSuppressWildcards
     override suspend fun clear()
 
-    @Query("SELECT * FROM Character")
+    @Query("SELECT * FROM Episode")
     @JvmSuppressWildcards
-    override fun getPagingSource(): PagingSource<Int, Character>
+    override fun getPagingSource(): PagingSource<Int, Episode>
 
-    @Query("SELECT * FROM Character")
+    @Query("SELECT * FROM Episode")
     @JvmSuppressWildcards
-    override suspend fun getAll(): List<Character>
+    override suspend fun getAll(): List<Episode>
 
 }

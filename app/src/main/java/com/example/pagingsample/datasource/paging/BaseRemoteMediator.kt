@@ -9,8 +9,8 @@ import com.example.pagingsample.datasource.local.dao.RemoteKeyDao
 import com.example.pagingsample.datasource.local.helper.ClearAllItemsAndKeysDaoHelper
 import com.example.pagingsample.datasource.local.helper.SaveItemsWithRemoteKeysDaoHelper
 import com.example.pagingsample.datasource.remote.helper.PagingApiHelper
-import com.example.pagingsample.model.local.RemoteKey
-import com.example.pagingsample.model.local.interfaces.Identifiable
+import com.example.pagingsample.model.RemoteKey
+import com.example.pagingsample.model.interfaces.Identifiable
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

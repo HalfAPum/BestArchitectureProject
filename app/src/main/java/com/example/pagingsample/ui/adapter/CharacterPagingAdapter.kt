@@ -1,7 +1,7 @@
 package com.example.pagingsample.ui.adapter
 
 import android.view.ViewGroup
-import com.example.pagingsample.model.local.character.Character
+import com.example.pagingsample.model.Character
 import com.example.pagingsample.ui.adapter.base.BasePagingAdapter
 import com.example.pagingsample.ui.viewholder.CharacterItemViewHolder
 

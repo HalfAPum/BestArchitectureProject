@@ -7,18 +7,18 @@ import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.pagingsample.R
 import com.example.pagingsample.databinding.FragmentCharacterBinding
-import com.example.pagingsample.model.local.character.Character
+import com.example.pagingsample.model.Character
 import com.example.pagingsample.ui.adapter.CharacterPagingAdapter
 import com.example.pagingsample.ui.launchSubscribeFlow
 import com.example.pagingsample.ui.navigate
-import com.example.pagingsample.viewmodel.RickAndMortyViewModel
+import com.example.pagingsample.viewmodel.CharacterViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
 class CharacterFragment : Fragment(R.layout.fragment_character) {
 
-    private val viewModel : RickAndMortyViewModel by viewModels()
+    private val viewModel : CharacterViewModel by viewModels()
 
     private val binding: FragmentCharacterBinding by viewBinding()
 
@@ -29,7 +29,7 @@ class CharacterFragment : Fragment(R.layout.fragment_character) {
         binding.recyclerView.adapter = adapter
 
         launchSubscribeFlow {
-            viewModel.subscribeCharacters().collectLatest {
+            viewModel.charactersFlow().collectLatest {
                 adapter.submitData(it)
             }
         }

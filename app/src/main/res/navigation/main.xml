@@ -14,6 +14,7 @@
       android:id="@+id/action_to_details"
       app:destination="@id/characterDetailsFragment" />
   </fragment>
+
   <fragment
     android:id="@+id/characterDetailsFragment"
     android:name="com.example.pagingsample.ui.fragment.character.CharacterDetailsFragment"
@@ -21,6 +22,18 @@
     tools:layout="@layout/fragment_character_details" >
     <argument
       android:name="character"
-      app:argType="com.example.pagingsample.model.local.character.Character" />
+      app:argType="com.example.pagingsample.model.Character" />
   </fragment>
+
+  <fragment
+    android:id="@+id/locations_dest"
+    android:name="com.example.pagingsample.ui.fragment.LocationFragment"
+    android:label="fragment_location"
+    tools:layout="@layout/fragment_location" />
+
+  <fragment
+    android:id="@+id/episodes_dest"
+    android:name="com.example.pagingsample.ui.fragment.EpisodeFragment"
+    android:label="fragment_episode"
+    tools:layout="@layout/fragment_episode" />
 </navigation>

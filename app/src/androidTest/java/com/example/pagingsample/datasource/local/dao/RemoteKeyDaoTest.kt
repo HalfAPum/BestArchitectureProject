@@ -3,7 +3,7 @@ package com.example.pagingsample.datasource.local.dao
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
 import com.example.pagingsample.datasource.local.dao.base.BaseDaoTest
-import com.example.pagingsample.model.local.RemoteKey
+import com.example.pagingsample.model.RemoteKey
 import com.example.pagingsample.utils.EmulatedData
 import com.google.common.truth.Truth.assertThat
 import dagger.hilt.android.testing.HiltAndroidTest

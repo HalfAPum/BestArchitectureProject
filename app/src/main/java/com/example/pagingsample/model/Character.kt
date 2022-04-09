@@ -1,10 +1,10 @@
-package com.example.pagingsample.model.local.character
+package com.example.pagingsample.model
 
 import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.pagingsample.model.local.interfaces.Identifiable
+import com.example.pagingsample.model.interfaces.Identifiable
 import kotlinx.parcelize.Parcelize
 
 @Entity

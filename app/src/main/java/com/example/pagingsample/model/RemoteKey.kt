@@ -1,4 +1,4 @@
-package com.example.pagingsample.model.local
+package com.example.pagingsample.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

@@ -1,14 +1,14 @@
 package com.example.pagingsample.datasource.remote.mapper.list
 
-import com.example.CharactersPagingQuery
+import com.example.LocationsPagingQuery
 import com.example.pagingsample.datasource.remote.mapper.base.ListMapper
 import com.example.pagingsample.datasource.remote.mapper.map
-import com.example.pagingsample.model.Character
+import com.example.pagingsample.model.Location
 
-object CharacterListMapper : ListMapper<CharactersPagingQuery.Data, Character> {
+object LocationListMapper : ListMapper<LocationsPagingQuery.Data, Location> {
 
     override fun map(
-        serverData: CharactersPagingQuery.Data
+        serverData: LocationsPagingQuery.Data
     ) = serverData.map()
 
 }

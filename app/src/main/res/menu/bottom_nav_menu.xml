@@ -4,8 +4,12 @@
     android:icon="@drawable/ic_character"
     android:title="Characters"
     />
-  <item android:id="@+id/passengers_dest"
-    android:icon="@drawable/ic_passenger"
-    android:title="Passengers"
+  <item android:id="@+id/locations_dest"
+    android:icon="@drawable/ic_location"
+    android:title="Locations"
+    />
+  <item android:id="@+id/episodes_dest"
+    android:icon="@drawable/ic_episode"
+    android:title="Episodes"
     />
 </menu>

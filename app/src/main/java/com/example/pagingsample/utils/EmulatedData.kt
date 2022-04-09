@@ -1,7 +1,7 @@
 package com.example.pagingsample.utils
 
-import com.example.pagingsample.model.local.RemoteKey
-import com.example.pagingsample.model.local.character.Character
+import com.example.pagingsample.model.Character
+import com.example.pagingsample.model.RemoteKey
 
 object EmulatedData {
 

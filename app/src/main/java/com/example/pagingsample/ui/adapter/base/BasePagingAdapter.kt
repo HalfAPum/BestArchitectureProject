@@ -1,7 +1,7 @@
 package com.example.pagingsample.ui.adapter.base
 
 import androidx.paging.PagingDataAdapter
-import com.example.pagingsample.model.local.interfaces.Identifiable
+import com.example.pagingsample.model.interfaces.Identifiable
 import com.example.pagingsample.ui.diffutil.IdentifiableDiffUtil
 import com.example.pagingsample.ui.viewholder.base.BaseItemViewHolder
 import com.example.pagingsample.utils.TypedVoidCallback

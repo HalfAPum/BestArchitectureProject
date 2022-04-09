@@ -7,7 +7,7 @@ import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.pagingsample.R
 import com.example.pagingsample.databinding.FragmentCharacterDetailsBinding
-import com.example.pagingsample.model.local.character.Character
+import com.example.pagingsample.model.Character
 
 class CharacterDetailsFragment : Fragment(R.layout.fragment_character_details) {
 

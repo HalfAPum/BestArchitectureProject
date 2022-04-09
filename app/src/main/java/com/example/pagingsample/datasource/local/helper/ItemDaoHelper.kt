@@ -5,7 +5,7 @@ import com.example.pagingsample.datasource.local.ITransactionManager
 import com.example.pagingsample.datasource.local.dao.RemoteKeyDao
 import com.example.pagingsample.datasource.local.dao.base.BaseDao
 import com.example.pagingsample.datasource.local.dao.base.BaseGetPagingSourceDao
-import com.example.pagingsample.model.local.RemoteKey
+import com.example.pagingsample.model.RemoteKey
 import javax.inject.Inject
 
 //Todo remove open or provide interface or put up with it

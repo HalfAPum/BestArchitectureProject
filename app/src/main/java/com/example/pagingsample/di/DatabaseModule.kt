@@ -3,10 +3,14 @@ package com.example.pagingsample.di
 import com.example.pagingsample.datasource.local.AppDatabase
 import com.example.pagingsample.datasource.local.ITransactionManager
 import com.example.pagingsample.datasource.local.dao.CharacterDao
+import com.example.pagingsample.datasource.local.dao.EpisodeDao
+import com.example.pagingsample.datasource.local.dao.LocationDao
 import com.example.pagingsample.datasource.local.dao.RemoteKeyDao
 import com.example.pagingsample.datasource.local.dao.base.BaseDao
 import com.example.pagingsample.datasource.local.dao.base.BaseGetPagingSourceDao
-import com.example.pagingsample.model.local.character.Character
+import com.example.pagingsample.model.Character
+import com.example.pagingsample.model.Episode
+import com.example.pagingsample.model.Location
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,6 +31,14 @@ object DatabaseModule {
 
     @Singleton
     @Provides
+    fun provideLocationDao(appDatabase: AppDatabase): LocationDao = appDatabase.locationDao()
+
+    @Singleton
+    @Provides
+    fun provideEpisodeDao(appDatabase: AppDatabase): EpisodeDao = appDatabase.episodeDao()
+
+    @Singleton
+    @Provides
     fun provideRemoteKeyDao(appDatabase: AppDatabase): RemoteKeyDao = appDatabase.remoteKeyDao()
 
     @Singleton
@@ -36,5 +48,21 @@ object DatabaseModule {
     @Singleton
     @Provides
     fun provideBaseGetPagingSourceDaoCharacter(characterDao: CharacterDao): BaseGetPagingSourceDao<Character> = characterDao
+
+    @Singleton
+    @Provides
+    fun provideBaseDaoLocation(locationDao: LocationDao): BaseDao<Location> = locationDao
+
+    @Singleton
+    @Provides
+    fun provideBaseGetPagingSourceDaoLocation(locationDao: LocationDao): BaseGetPagingSourceDao<Location> = locationDao
+
+    @Singleton
+    @Provides
+    fun provideBaseDaoEpisode(episodeDao: EpisodeDao): BaseDao<Episode> = episodeDao
+
+    @Singleton
+    @Provides
+    fun provideBaseGetPagingSourceDaoEpisode(episodeDao: EpisodeDao): BaseGetPagingSourceDao<Episode> = episodeDao
 
 }
