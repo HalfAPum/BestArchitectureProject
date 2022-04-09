@@ -1,5 +1,5 @@
-query LocationsPaging($page: Int!) {
-    locations(page: $page) {
+query EpisodesPaging($page: Int!) {
+    episodes(page: $page) {
         results {
             id
             name

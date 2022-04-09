@@ -1,4 +1,4 @@
-package com.example.pagingsample.datasource.paging.base
+package com.example.pagingsample.datasource.paging
 
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.RemoteMediator

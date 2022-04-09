@@ -2,6 +2,8 @@ package com.example.pagingsample.datasource.paging.base
 
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.RemoteMediator.MediatorResult
+import com.example.pagingsample.datasource.paging.MediatorSuccessResult
+import com.example.pagingsample.datasource.paging.runPagingCatchingException
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest

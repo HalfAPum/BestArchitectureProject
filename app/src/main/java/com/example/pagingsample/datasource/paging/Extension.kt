@@ -1,4 +1,4 @@
-package com.example.pagingsample.datasource.paging.base
+package com.example.pagingsample.datasource.paging
 
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.PagingState
@@ -37,6 +37,7 @@ fun <T : Any> PagingState<Int, T>.findClosestItemToCurrentPosition() =
 
 fun PageResult(page: Int) = LoadTypeResult.PageResult(page)
 
+@OptIn(ExperimentalPagingApi::class)
 fun MediatorSuccessResult(
     endOfPaginationReached: Boolean
 ) = LoadTypeResult.MediatorSuccessResult(
