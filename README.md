@@ -6,7 +6,7 @@ Create new issues and discuss project.
 
 # State
 
-Now is not stable and in ACTIVE development process. First release planned to 10.05.2022.05.
+Now is not stable and in ACTIVE development process. First release planned to 10.05.2022.
 
 # Contribution
 
