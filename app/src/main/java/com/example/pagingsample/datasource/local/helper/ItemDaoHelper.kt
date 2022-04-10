@@ -8,7 +8,6 @@ import com.example.pagingsample.datasource.local.dao.base.BaseGetPagingSourceDao
 import com.example.pagingsample.model.RemoteKey
 import javax.inject.Inject
 
-//Todo remove open or provide interface or put up with it
 open class SaveItemsWithRemoteKeysDaoHelper<T : Any> @Inject constructor(
     private val itemDao: BaseDao<T>,
     private val remoteKeyDao: RemoteKeyDao,

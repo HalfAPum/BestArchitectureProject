@@ -68,7 +68,7 @@ class MockServerTest : HiltTest {
             body = "Internal server error",
             statusCode = 500,
             delayMillis = 1000L,
-        )
+            )
         )
 
         graphQLExecutor.executeQuery(CharactersPagingQuery(0))

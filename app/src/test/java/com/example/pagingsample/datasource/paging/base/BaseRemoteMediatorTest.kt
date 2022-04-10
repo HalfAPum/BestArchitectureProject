@@ -6,13 +6,12 @@ import com.example.pagingsample.datasource.local.ITransactionManager
 import com.example.pagingsample.datasource.local.dao.RemoteKeyDao
 import com.example.pagingsample.datasource.local.dao.base.BaseDao
 import com.example.pagingsample.datasource.local.helper.ClearAllItemsAndKeysDaoHelper
+import com.example.pagingsample.datasource.local.helper.RemoteMediatorDaoHelper
 import com.example.pagingsample.datasource.local.helper.SaveItemsWithRemoteKeysDaoHelper
 import com.example.pagingsample.datasource.paging.BaseRemoteMediator
-import com.example.pagingsample.datasource.remote.api.GraphQLExecutor
 import com.example.pagingsample.datasource.remote.helper.IPagingApiHelper
 import com.example.pagingsample.model.interfaces.Identifiable
 import com.example.pagingsample.utils.EmulatedData
-import com.example.pagingsample.utils.PagingQueryCallback
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -42,13 +41,9 @@ class BaseRemoteMediatorTest : MockitoTest {
     private val loadDispatcher = StandardTestDispatcher()
 
     @Mock
-    private lateinit var graphQLExecutor: GraphQLExecutor
-
-    @Mock
-    private lateinit var pagingQuery: PagingQueryCallback<*>
-
-    @Mock
     private lateinit var pagingApiHelper: IPagingApiHelper<Identifiable>
+
+    private lateinit var remoteMediatorDaoHelper: RemoteMediatorDaoHelper<Identifiable>
 
     private lateinit var remoteMediatorMock: BaseRemoteMediator<Identifiable>
 
@@ -57,9 +52,13 @@ class BaseRemoteMediatorTest : MockitoTest {
         val daoHelperArguments = UseConstructor.withArguments(itemDao, remoteKeyDao, transactionManager)
         saveDaoHelper = mock(useConstructor = daoHelperArguments)
         cleanDaoHelper = mock(useConstructor = daoHelperArguments)
+        remoteMediatorDaoHelper = mock(useConstructor = UseConstructor
+            .withArguments(saveDaoHelper, remoteKeyDao, cleanDaoHelper)
+        )
 
-        remoteMediatorMock = BaseRemoteMediator(saveDaoHelper,
-            remoteKeyDao, cleanDaoHelper, pagingApiHelper, loadDispatcher)
+        remoteMediatorMock = BaseRemoteMediator(
+            remoteMediatorDaoHelper, pagingApiHelper, loadDispatcher
+        )
     }
 
     private fun getRefreshPagingState() : PagingState<Int, Identifiable> {

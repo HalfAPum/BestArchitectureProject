@@ -5,11 +5,10 @@ import com.example.pagingsample.datasource.paging.PagerWrapper
 import com.example.pagingsample.model.Character
 import com.example.pagingsample.model.Episode
 import com.example.pagingsample.model.Location
+import dagger.hilt.android.scopes.ViewModelScoped
 import javax.inject.Inject
-import javax.inject.Singleton
 
-//TODO REMOVE SINGLETON HERE ITS BAD)
-@Singleton
+@ViewModelScoped
 @OptIn(ExperimentalPagingApi::class)
 class RickAndMortyRepository @Inject constructor(
     private val characterPager: PagerWrapper<Character>,

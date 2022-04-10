@@ -5,9 +5,7 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
-import com.example.pagingsample.datasource.local.dao.RemoteKeyDao
-import com.example.pagingsample.datasource.local.helper.ClearAllItemsAndKeysDaoHelper
-import com.example.pagingsample.datasource.local.helper.SaveItemsWithRemoteKeysDaoHelper
+import com.example.pagingsample.datasource.local.helper.RemoteMediatorDaoHelper
 import com.example.pagingsample.datasource.remote.helper.IPagingApiHelper
 import com.example.pagingsample.model.RemoteKey
 import com.example.pagingsample.model.interfaces.Identifiable
@@ -18,10 +16,7 @@ import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
 class BaseRemoteMediator<T : Identifiable> @Inject constructor(
-    //TODO extract helper to another remotemediatorhelper
-    private val saveDataWithRemoteKeysDaoHelper: SaveItemsWithRemoteKeysDaoHelper<T>,
-    private val remoteKeyDao: RemoteKeyDao,
-    private val cleanerDaoHelper: ClearAllItemsAndKeysDaoHelper<T>,
+    private val remoteMediatorDaoHelper: RemoteMediatorDaoHelper<T>,
     private val pagingApiHelper: IPagingApiHelper<T>,
     private val loadDispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) : RemoteMediator<Int, T>() {
@@ -49,7 +44,7 @@ class BaseRemoteMediator<T : Identifiable> @Inject constructor(
             val data = loadDataFromServer(page)
 
             if (loadType == LoadType.REFRESH) {
-                cleanerDaoHelper.clearTables()
+                remoteMediatorDaoHelper.clearTables()
             }
 
             data.saveToCache(page)
@@ -105,7 +100,7 @@ class BaseRemoteMediator<T : Identifiable> @Inject constructor(
      */
     @WorkerThread
     private suspend fun getItemRemoteKey(item: Identifiable?) =
-        item?.let { remoteKeyDao.getById(it.id) }
+        item?.let { remoteMediatorDaoHelper.getById(it.id) }
 
 
     private fun Int?.getLoadTypeResult(remoteKey: RemoteKey?): LoadTypeResult {
@@ -128,7 +123,7 @@ class BaseRemoteMediator<T : Identifiable> @Inject constructor(
 
         val remoteKeys = map { RemoteKey(it.id, prevKey, nextKey) }
 
-        saveDataWithRemoteKeysDaoHelper.save(this, remoteKeys)
+        remoteMediatorDaoHelper.save(this, remoteKeys)
 
         return MediatorResult.Success(isEndOfPaginationReached)
     }

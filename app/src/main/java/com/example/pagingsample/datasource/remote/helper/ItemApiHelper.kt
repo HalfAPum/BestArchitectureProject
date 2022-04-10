@@ -1,7 +1,7 @@
 package com.example.pagingsample.datasource.remote.helper
 
 import com.apollographql.apollo3.api.Query
-import com.example.pagingsample.datasource.remote.api.BaseApi
+import com.example.pagingsample.datasource.remote.api.PagingApi
 import com.example.pagingsample.datasource.remote.mapper.base.ListMapper
 import javax.inject.Inject
 
@@ -16,20 +16,19 @@ import javax.inject.Inject
  * Type [RESULT] means convenient for app use type.
  */
 open class PagingApiHelper<SERVER : Query.Data, RESULT : Any> @Inject constructor(
-    //TODO use interface instead of implementation
-    private val baseApi: BaseApi<SERVER>,
+    private val pagingApi: PagingApi<SERVER>,
     private val mapper: ListMapper<SERVER, RESULT>,
 ) : IPagingApiHelper<RESULT> {
 
     override val pagingStart: Int
-        get() = baseApi.pagingStart
+        get() = pagingApi.pagingStart
 
     override suspend fun load(page: Int): List<RESULT> {
         return loadFromServer(page).mapServerData()
     }
 
     private suspend fun loadFromServer(page: Int) : SERVER? {
-        return baseApi.getPagingItems(page)
+        return pagingApi.getPagingItems(page)
     }
 
     /**
@@ -38,7 +37,6 @@ open class PagingApiHelper<SERVER : Query.Data, RESULT : Any> @Inject constructo
      * objects to [RESULT].
      */
     private fun SERVER?.mapServerData() : List<RESULT> {
-        //TODO TEST TO REMOVE ONE EMPTY LIST CALL
         return this?.let {
             mapper.map(it)
         } ?: emptyList()
