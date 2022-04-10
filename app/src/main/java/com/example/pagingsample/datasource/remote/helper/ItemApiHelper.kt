@@ -16,6 +16,7 @@ import javax.inject.Inject
  * Type [RESULT] means convenient for app use type.
  */
 open class PagingApiHelper<SERVER : Query.Data, RESULT : Any> @Inject constructor(
+    //TODO use interface instead of implementation
     private val baseApi: BaseApi<SERVER>,
     private val mapper: ListMapper<SERVER, RESULT>,
 ) : IPagingApiHelper<RESULT> {

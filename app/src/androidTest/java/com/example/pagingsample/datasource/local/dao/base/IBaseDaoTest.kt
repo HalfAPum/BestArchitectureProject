@@ -1,10 +1,11 @@
 package com.example.pagingsample.datasource.local.dao.base
 
 import androidx.room.Dao
+import com.example.pagingsample.InstrumentationHiltTest
 import com.google.common.truth.Truth
 import org.junit.Test
 
-interface IBaseDaoTest<T, D : BaseDao<T>> : DatabaseTest, HiltTest {
+interface IBaseDaoTest<T, D : BaseDao<T>> : DatabaseTest, InstrumentationHiltTest {
 
     /**
      * Data for tests.
