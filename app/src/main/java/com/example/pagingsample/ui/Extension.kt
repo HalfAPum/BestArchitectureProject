@@ -7,25 +7,20 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
-import com.example.pagingsample.utils.SuspendVoidCallback
-import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 /**
  * Implied to use inside [LifecycleOwner].
  */
-fun LifecycleOwner.launchSubscribeFlow(block: SuspendVoidCallback) {
+fun <T> LifecycleOwner.launchSubscribeFlow(flow: Flow<T>, block: suspend (item: T) -> Unit) {
     lifecycleScope.launch {
-        subscribeFlow(block)
-    }
-}
-
-/**
- * Implied to use inside [CoroutineScope] and [LifecycleOwner].
- */
-suspend fun LifecycleOwner.subscribeFlow(block: SuspendVoidCallback) {
-    repeatOnLifecycle(Lifecycle.State.STARTED) {
-        block.invoke()
+        repeatOnLifecycle(Lifecycle.State.STARTED) {
+            flow.collectLatest {
+                block.invoke(it)
+            }
+        }
     }
 }
 

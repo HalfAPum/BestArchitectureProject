@@ -113,10 +113,14 @@ dependencies {
   //apollo
   implementation "com.apollographql.apollo3:apollo-runtime:3.2.1"
 
+  //Orbit MVI
+  implementation("org.orbit-mvi:orbit-core:4.3.2")
+  implementation("org.orbit-mvi:orbit-viewmodel:4.3.2")
+
   //Tests
   // Local Unit Tests
   testImplementation 'junit:junit:4.13.2'
-  testImplementation "org.mockito.kotlin:mockito-kotlin:3.2.0"
+  testImplementation "org.mockito.kotlin:mockito-kotlin:4.0.0"
   testImplementation "com.google.truth:truth:1.1.3"
   testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0'
   testImplementation 'com.apollographql.apollo3:apollo-mockserver:3.2.1'

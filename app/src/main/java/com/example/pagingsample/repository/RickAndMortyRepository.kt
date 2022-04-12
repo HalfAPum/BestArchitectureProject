@@ -16,7 +16,7 @@ class RickAndMortyRepository @Inject constructor(
     private val episodePager: PagerWrapper<Episode>,
 ) {
 
-    fun getCharactersPagingData() = characterPager.flow
+    fun getCharactersPagingFlow() = characterPager.flow
 
     fun getLocationsPagingData() = locationPager.flow
 

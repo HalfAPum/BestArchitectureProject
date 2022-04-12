@@ -9,7 +9,7 @@
     android:id="@+id/characters_dest"
     android:name="com.example.pagingsample.ui.fragment.character.CharacterFragment"
     android:label="fragment_character"
-    tools:layout="@layout/fragment_character" >
+    tools:layout="@layout/fragment_item" >
     <action
       android:id="@+id/action_to_details"
       app:destination="@id/characterDetailsFragment" />
