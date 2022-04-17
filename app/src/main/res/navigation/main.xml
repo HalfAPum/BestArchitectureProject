@@ -23,6 +23,9 @@
     <argument
       android:name="characterId"
       app:argType="string" />
+    <action
+      android:id="@+id/action_characterDetailsFragment_to_locationDetailsFragment"
+      app:destination="@id/locationDetailsFragment" />
   </fragment>
 
   <fragment

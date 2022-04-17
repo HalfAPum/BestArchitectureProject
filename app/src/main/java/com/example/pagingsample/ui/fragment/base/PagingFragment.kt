@@ -5,6 +5,7 @@ import android.view.View
 import androidx.annotation.CallSuper
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
+import androidx.recyclerview.widget.DividerItemDecoration
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.pagingsample.R
 import com.example.pagingsample.databinding.FragmentItemBinding
@@ -35,7 +36,10 @@ abstract class PagingFragment<T : Identifiable> : Fragment(R.layout.fragment_ite
     @CallSuper
     protected open fun bindViews() {
         adapter.onItemClick = ::onItemClick
+        val dividerDecorator = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
+        binding.recyclerView.addItemDecoration(dividerDecorator)
         binding.recyclerView.adapter = adapter
+
     }
 
     private fun onItemClick(item: T) {
