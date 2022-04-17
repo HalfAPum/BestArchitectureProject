@@ -4,18 +4,17 @@ import android.os.Bundle
 import android.view.View
 import androidx.annotation.CallSuper
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.NavDirections
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.pagingsample.R
 import com.example.pagingsample.databinding.FragmentItemBinding
-import com.example.pagingsample.model.action.CardClickUiAction
-import com.example.pagingsample.model.effect.NavigationSideEffect
 import com.example.pagingsample.model.interfaces.Identifiable
-import com.example.pagingsample.model.state.PagingState
-import com.example.pagingsample.ui.adapter.base.BasePagingAdapter
+import com.example.pagingsample.ui.adapter.paging.base.BasePagingAdapter
 import com.example.pagingsample.ui.launchSubscribeFlow
 import com.example.pagingsample.ui.navigate
+import com.example.pagingsample.viewmodel.CardClickUiAction
+import com.example.pagingsample.viewmodel.NavigationSideEffect
+import com.example.pagingsample.viewmodel.PagingState
 import com.example.pagingsample.viewmodel.PagingViewModel
 import org.orbitmvi.orbit.viewmodel.observe
 
@@ -23,9 +22,9 @@ abstract class PagingFragment<T : Identifiable> : Fragment(R.layout.fragment_ite
 
     protected abstract val adapter: BasePagingAdapter<T>
 
-    private val viewModel: PagingViewModel<T> by viewModels()
+    protected abstract val viewModel: PagingViewModel<T>
 
-    protected val binding: FragmentItemBinding by viewBinding()
+    private val binding: FragmentItemBinding by viewBinding()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -49,9 +48,9 @@ abstract class PagingFragment<T : Identifiable> : Fragment(R.layout.fragment_ite
         }
     }
 
-    private fun sideEffect(sideEffect: NavigationSideEffect<T>) {
-        navigate(getDetailsNavigationDirection(sideEffect.item))
+    private fun sideEffect(sideEffect: NavigationSideEffect) {
+        navigate(getDetailsNavigationDirection(sideEffect.id))
     }
 
-    protected abstract fun getDetailsNavigationDirection(item: T) : NavDirections
+    protected abstract fun getDetailsNavigationDirection(id: String) : NavDirections
 }

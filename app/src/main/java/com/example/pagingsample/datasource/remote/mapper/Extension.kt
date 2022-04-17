@@ -1,19 +1,31 @@
 package com.example.pagingsample.datasource.remote.mapper
 
-import com.example.CharactersPagingQuery
-import com.example.EpisodesPagingQuery
-import com.example.LocationsPagingQuery
-import com.example.pagingsample.model.Character
-import com.example.pagingsample.model.Episode
-import com.example.pagingsample.model.Location
+import com.example.*
+import com.example.pagingsample.model.character.Character
+import com.example.pagingsample.model.character.CharacterDetails
+import com.example.pagingsample.model.character.CharacterWithDetails
+import com.example.pagingsample.model.episode.Episode
+import com.example.pagingsample.model.episode.EpisodeDetails
+import com.example.pagingsample.model.episode.EpisodeDetailsWithCharacters
+import com.example.pagingsample.model.episode.EpisodeWithDetails
+import com.example.pagingsample.model.location.Location
+import com.example.pagingsample.model.location.LocationDetails
+import com.example.pagingsample.model.location.LocationWithDetails
 
 fun CharactersPagingQuery.Data.map() = characters.results.mapCharacters()
 
 private fun List<CharactersPagingQuery.Result>.mapCharacters() = map { it.toCharacter() }
 
 private fun CharactersPagingQuery.Result.toCharacter(): Character {
-    return Character(id, name)
+    return Character(id, name, image, status, gender)
 }
+
+fun CharacterByIdQuery.Data.map() = character?.map()
+
+private fun CharacterByIdQuery.Character.map() = CharacterWithDetails(
+    Character(id, name, image, status, gender),
+    CharacterDetails(id, created, location?.id),
+)
 
 fun LocationsPagingQuery.Data.map() = locations.results.mapLocations()
 
@@ -23,10 +35,30 @@ private fun LocationsPagingQuery.Result.toLocation(): Location {
     return Location(id, name)
 }
 
+fun LocationByIdQuery.Data.map() = location?.map()
+
+private fun LocationByIdQuery.Location.map() = LocationWithDetails(
+    Location(id, name),
+    LocationDetails(id, type, dimension),
+)
+
 fun EpisodesPagingQuery.Data.map() = episodes.results.mapEpisodes()
 
 private fun List<EpisodesPagingQuery.Result>.mapEpisodes() = map { it.toEpisode() }
 
 private fun EpisodesPagingQuery.Result.toEpisode(): Episode {
-    return Episode(id, name)
+    return Episode(id, name, air_date)
 }
+
+fun EpisodeByIdQuery.Data.map() = episode?.map()
+
+private fun EpisodeByIdQuery.Episode.map() = EpisodeWithDetails(
+    Episode(id, name, air_date),
+    EpisodeDetailsWithCharacters(
+        EpisodeDetails(id, created, episode),
+        characters.mapCharacter()
+    )
+)
+
+private fun List<EpisodeByIdQuery.Character?>.mapCharacter() =
+    filterNotNull().map { Character(it.id, image = it.image) }

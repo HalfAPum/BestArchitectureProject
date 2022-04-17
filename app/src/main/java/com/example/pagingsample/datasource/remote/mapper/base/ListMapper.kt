@@ -1,8 +1,6 @@
 package com.example.pagingsample.datasource.remote.mapper.base
 
-import com.apollographql.apollo3.api.Query
-
-interface ListMapper<SERVER: Query.Data, RESULT> {
+interface ListMapper<SERVER, RESULT> {
 
     fun map(serverData: SERVER) : List<RESULT>
 

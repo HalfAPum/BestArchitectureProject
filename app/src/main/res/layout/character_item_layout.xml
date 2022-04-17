@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="@dimen/item_list_height"
+  android:padding="@dimen/item_list_padding">
+
+  <com.google.android.material.imageview.ShapeableImageView
+    android:id="@+id/character_avatar"
+    android:layout_width="@dimen/character_list_item_image"
+    android:layout_height="@dimen/character_list_item_image"
+    android:scaleType="centerCrop"
+    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    tools:background="@color/black" />
+
+  <TextView
+    android:id="@+id/name"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:ellipsize="end"
+    android:gravity="center_vertical"
+    android:maxLines="1"
+    android:textColor="@color/black"
+    android:textSize="20sp"
+    android:layout_marginStart="@dimen/item_list_padding"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@+id/character_avatar"
+    app:layout_constraintTop_toTopOf="parent"
+    tools:text="TESTDATA! !*&amp;@$@&amp;*!*$!@$*(($@asdasd" />
+
+  <TextView
+    android:id="@+id/gender"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/item_list_padding"
+    android:textColor="@color/black"
+    android:textSize="16sp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toEndOf="@+id/character_avatar"
+    tools:text="Gender: Male" />
+
+  <TextView
+    android:id="@+id/status"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="@color/black"
+    android:textSize="16sp"
+    android:layout_marginStart="@dimen/item_list_padding_big"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toEndOf="@+id/gender"
+    tools:text="Status: Dead" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

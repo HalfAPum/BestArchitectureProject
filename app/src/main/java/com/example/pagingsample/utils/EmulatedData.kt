@@ -1,18 +1,18 @@
 package com.example.pagingsample.utils
 
-import com.example.pagingsample.model.Character
-import com.example.pagingsample.model.Episode
-import com.example.pagingsample.model.Location
 import com.example.pagingsample.model.RemoteKey
+import com.example.pagingsample.model.character.Character
+import com.example.pagingsample.model.episode.Episode
+import com.example.pagingsample.model.location.Location
 
 object EmulatedData {
 
-    val character = Character("70","Concerto")
+    val character = Character("70","Concerto", "http/image1", "Alive", "Male")
 
     val characterList = listOf(
-        Character("815","Punk Rick"),
-        Character("354","Toby Matthews"),
-        Character("759","Turkey Morty"),
+        Character("815","Punk Rick", "http/image2", "Alive", "Male"),
+        Character("354","Toby Matthews", "http/image3", "Dead", "Male"),
+        Character("759","Turkey Morty", "http/image4", "Unknown", "Female"),
     )
     val location = Location("70","Concerto")
 
@@ -21,12 +21,12 @@ object EmulatedData {
         Location("354","Toby Matthews"),
         Location("759","Turkey Morty"),
     )
-    val episode = Episode("70","Concerto")
+    val episode = Episode("70","Concerto", "07-12-2021")
 
     val episodeList = listOf(
-        Episode("815","Punk Rick"),
-        Episode("354","Toby Matthews"),
-        Episode("759","Turkey Morty"),
+        Episode("815","Punk Rick", "01-30-2017"),
+        Episode("354","Toby Matthews", "11-10-2019"),
+        Episode("759","Turkey Morty", "03-06-2022"),
     )
 
     //    val character = Character("70","Concerto","Dead","Humanoid","",

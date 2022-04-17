@@ -13,55 +13,48 @@
     android:layout_height="300dp"
     android:scaleType="centerCrop"
     android:layout_marginTop="20dp"
-    android:contentDescription="Character image"
+    android:contentDescription="@string/character_image_description"
     app:strokeColor="@color/light_grey"
     app:strokeWidth="20dp"
     android:padding="20dp"
     app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent"
-    app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+    app:layout_constraintTop_toTopOf="parent"
+    tools:background="@color/black"/>
 
   <TextView
     android:id="@+id/name"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="40dp"
-    android:padding="10dp"
-    android:textSize="30sp"
-    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-    android:background="@drawable/round_light_grey_background"
+    style="@style/Widget.App.TextView.Details"
     tools:text="Rick and morty"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/character_image" />
 
-  <Button
-    android:id="@+id/first_appearance_action"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:backgroundTint="@color/light_grey"
-    android:padding="10dp"
-    android:text="First seen in..."
-    android:textColor="@color/black"
-    android:textSize="23sp"
-    android:layout_marginBottom="20dp"
-    android:drawableEnd="@drawable/ic_arrow_forward"
-    app:layout_constraintBottom_toTopOf="@+id/last_position_action"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent" />
+  <TextView
+    android:id="@+id/created"
+    style="@style/Widget.App.TextView.Details"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/name"
+    tools:text="Created: 2017-11-04 \n(2 years 5 month 13 days ago)" />
+
+  <TextView
+    android:id="@+id/gender"
+    style="@style/Widget.App.TextView.Details"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/created"
+    tools:text="Gender: Male" />
 
   <Button
-    android:id="@+id/last_position_action"
-    android:layout_width="match_parent"
+    android:id="@+id/status_button"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:backgroundTint="@color/light_grey"
-    android:padding="10dp"
-    android:textSize="23sp"
-    android:textColor="@color/black"
-    android:text="Go to last location"
+    android:layout_marginTop="20dp"
+    android:textSize="22sp"
+    android:padding="15dp"
     android:drawableEnd="@drawable/ic_arrow_forward"
-    app:layout_constraintBottom_toBottomOf="parent"
+    android:drawableTint="@color/white"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent" />
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/gender"
+    tools:text="Status: Alive"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

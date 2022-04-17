@@ -9,7 +9,6 @@ import com.example.pagingsample.datasource.local.helper.ClearAllItemsAndKeysDaoH
 import com.example.pagingsample.datasource.local.helper.RemoteMediatorDaoHelper
 import com.example.pagingsample.datasource.local.helper.SaveItemsWithRemoteKeysDaoHelper
 import com.example.pagingsample.datasource.paging.BaseRemoteMediator
-import com.example.pagingsample.datasource.remote.helper.IPagingApiHelper
 import com.example.pagingsample.model.interfaces.Identifiable
 import com.example.pagingsample.utils.EmulatedData
 import com.google.common.truth.Truth.assertThat

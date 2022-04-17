@@ -1,0 +1,25 @@
+query CharactersPaging($page: Int!) {
+    characters(page: $page) {
+        results {
+            id
+            name
+            status
+            gender
+            image
+        }
+    }
+}
+
+query CharacterById($id: ID!) {
+    character(id: $id) {
+        id
+        name
+        status
+        gender
+        image
+        created
+        location {
+            id
+        }
+    }
+}

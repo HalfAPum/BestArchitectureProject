@@ -1,0 +1,17 @@
+query LocationsPaging($page: Int!) {
+    locations(page: $page) {
+        results {
+            id
+            name
+        }
+    }
+}
+
+query LocationById($id: ID!) {
+    location(id: $id) {
+        id
+        name
+        type
+        dimension
+    }
+}

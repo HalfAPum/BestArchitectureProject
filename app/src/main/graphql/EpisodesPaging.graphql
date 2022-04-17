@@ -1,8 +1,0 @@
-query EpisodesPaging($page: Int!) {
-    episodes(page: $page) {
-        results {
-            id
-            name
-        }
-    }
-}

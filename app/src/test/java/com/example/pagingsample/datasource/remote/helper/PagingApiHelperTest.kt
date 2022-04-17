@@ -3,7 +3,7 @@ package com.example.pagingsample.datasource.remote.helper
 import com.apollographql.apollo3.api.Query
 import com.example.CharactersPagingQuery
 import com.example.pagingsample.MockitoTest
-import com.example.pagingsample.datasource.remote.api.PagingApi
+import com.example.pagingsample.datasource.remote.api.base.PagingApi
 import com.example.pagingsample.datasource.remote.mapper.base.ListMapper
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi

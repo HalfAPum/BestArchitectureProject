@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:padding="@dimen/item_list_padding"
+  android:layout_height="@dimen/item_list_height">
+
+  <TextView
+    android:id="@+id/name"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:textSize="20sp"
+    android:maxLines="1"
+    android:ellipsize="end"
+    android:textColor="@color/black"
+    tools:text="TESTDATA! !*&amp;@$@&amp;*!*$!@$*(($@"/>
+
+</LinearLayout>

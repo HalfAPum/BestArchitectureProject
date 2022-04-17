@@ -11,7 +11,7 @@ type Character {
   # The id of the character.
   id: ID!
   # The name of the character.
-  name: String!
+  name: String
   # The status of the character ('Alive', 'Dead' or 'unknown').
   status: String
   # The species of the character.

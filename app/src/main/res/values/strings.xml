@@ -1,3 +1,11 @@
 <resources>
   <string name="app_name">BestArchitectureProject</string>
+  <string name="gender">Gender: %1$s</string>
+  <string name="status">Status: %1$s</string>
+  <string name="type">Type: %1$s</string>
+  <string name="dimension">Dimension: %1$s</string>
+  <string name="air_date">Air date: %1$s</string>
+  <string name="created">Created: %1$s</string>
+  <string name="characters">Characters:</string>
+  <string name="character_image_description">Character image</string>
 </resources>

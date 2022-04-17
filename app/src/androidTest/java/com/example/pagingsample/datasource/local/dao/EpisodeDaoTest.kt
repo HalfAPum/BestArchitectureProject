@@ -3,7 +3,8 @@ package com.example.pagingsample.datasource.local.dao
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
 import com.example.pagingsample.datasource.local.dao.base.BaseDaoTest
-import com.example.pagingsample.model.Episode
+import com.example.pagingsample.datasource.local.dao.episode.EpisodeDao
+import com.example.pagingsample.model.episode.Episode
 import com.example.pagingsample.utils.EmulatedData
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi

@@ -1,8 +1,10 @@
 package com.example.pagingsample.ui.fragment.character
 
-import com.example.pagingsample.model.Character
-import com.example.pagingsample.ui.adapter.CharacterPagingAdapter
+import androidx.fragment.app.viewModels
+import com.example.pagingsample.model.character.Character
+import com.example.pagingsample.ui.adapter.paging.CharacterPagingAdapter
 import com.example.pagingsample.ui.fragment.base.PagingFragment
+import com.example.pagingsample.viewmodel.CharacterPagingViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -10,7 +12,9 @@ class CharacterFragment : PagingFragment<Character>() {
 
     override val adapter by lazy { CharacterPagingAdapter() }
 
-    override fun getDetailsNavigationDirection(item: Character) =
-        CharacterFragmentDirections.actionToDetails(item)
+    override val viewModel: CharacterPagingViewModel by viewModels()
+
+    override fun getDetailsNavigationDirection(id: String) =
+        CharacterFragmentDirections.actionToDetails(id)
 
 }

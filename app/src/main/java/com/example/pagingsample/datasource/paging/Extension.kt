@@ -5,15 +5,12 @@ import androidx.paging.PagingState
 import androidx.paging.RemoteMediator.MediatorResult
 import com.apollographql.apollo3.exception.JsonDataException
 import okio.IOException
-import retrofit2.HttpException
 
 @OptIn(ExperimentalPagingApi::class)
 suspend fun runPagingCatchingException(block: suspend () -> MediatorResult): MediatorResult {
     return try {
         block.invoke()
     } catch (exception: IOException) {
-        MediatorResult.Error(exception)
-    } catch (exception: HttpException) {
         MediatorResult.Error(exception)
     } catch (exception: JsonDataException) {
         MediatorResult.Error(exception)

@@ -1,7 +1,10 @@
+@file:Suppress("UNCHECKED_CAST")
+
 package com.example.pagingsample.datasource.remote.helper
 
 import com.apollographql.apollo3.api.Query
-import com.example.pagingsample.datasource.remote.api.PagingApi
+import com.example.pagingsample.datasource.remote.api.base.BaseApi
+import com.example.pagingsample.datasource.remote.mapper.base.ItemMapper
 import com.example.pagingsample.datasource.remote.mapper.base.ListMapper
 import javax.inject.Inject
 
@@ -16,7 +19,7 @@ import javax.inject.Inject
  * Type [RESULT] means convenient for app use type.
  */
 open class PagingApiHelper<SERVER : Query.Data, RESULT : Any> @Inject constructor(
-    private val pagingApi: PagingApi<SERVER>,
+    private val pagingApi: BaseApi<RESULT>,
     private val mapper: ListMapper<SERVER, RESULT>,
 ) : IPagingApiHelper<RESULT> {
 
@@ -28,18 +31,37 @@ open class PagingApiHelper<SERVER : Query.Data, RESULT : Any> @Inject constructo
     }
 
     private suspend fun loadFromServer(page: Int) : SERVER? {
-        return pagingApi.getPagingItems(page)
+        return pagingApi.getPagingItems(page) as? SERVER
     }
 
     /**
      * It's ok that we convert [SERVER] to [RESULT] as [List] because
-     * [SERVER] is wrapper of other [List] of objects, so it converts this
-     * objects to [RESULT].
+     * [SERVER] is wrapper around [List] of objects, so it converts this
+     * objects to [List] of [RESULT].
      */
     private fun SERVER?.mapServerData() : List<RESULT> {
         return this?.let {
             mapper.map(it)
         } ?: emptyList()
+    }
+
+}
+
+open class ItemApiHelper<SERVER : Query.Data, RESULT : Any> @Inject constructor(
+    private val itemApi: BaseApi<RESULT>,
+    private val mapper: ItemMapper<SERVER, RESULT>
+) {
+
+    suspend fun load(id: String) : RESULT? {
+        return loadFromServer(id).mapServerData()
+    }
+
+    private suspend fun loadFromServer(id: String): SERVER? {
+        return itemApi.getItemById(id) as? SERVER
+    }
+
+    private fun SERVER?.mapServerData(): RESULT? {
+        return this?.let { mapper.map(this) }
     }
 
 }
