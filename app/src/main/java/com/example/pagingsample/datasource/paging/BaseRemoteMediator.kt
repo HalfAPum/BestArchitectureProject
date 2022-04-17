@@ -66,9 +66,6 @@ class BaseRemoteMediator<T : Identifiable> @Inject constructor(
             val remoteKey = state.getClosestRemoteKeyForCurrentPosition()
             val position = remoteKey?.nextKey?.prevKey ?: startPage
 
-            //Clear needed tables if this is new load
-
-
             PageResult(position)
         }
         LoadType.PREPEND -> {

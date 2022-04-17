@@ -7,7 +7,6 @@ import com.example.pagingsample.model.episode.EpisodeWithDetails
 import com.example.pagingsample.model.location.LocationWithDetails
 import com.example.pagingsample.repository.DetailsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
 import org.orbitmvi.orbit.Container
 import org.orbitmvi.orbit.ContainerHost
 import org.orbitmvi.orbit.syntax.simple.intent
@@ -36,7 +35,7 @@ abstract class DetailsViewModel<D : Any> (
         }
     }
 
-    private suspend fun getItemById(id: String) : Flow<D> {
+    private suspend fun getItemById(id: String) : D {
         return detailsRepository.getFlowByItemId(id)
     }
 }
@@ -51,7 +50,7 @@ sealed class DetailsUiAction {
 
 sealed class DetailsState{
     object Loading : DetailsState()
-    class Data<D>(val item: Flow<D>) : DetailsState()
+    class Data<D>(val item: D) : DetailsState()
     object Error : DetailsState()
 }
 //TODO INVESTIGATE HILT DI AND DELETE THIS CLASSES

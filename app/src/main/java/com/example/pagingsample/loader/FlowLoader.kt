@@ -1,6 +1,5 @@
 package com.example.pagingsample.loader
 
-import com.example.pagingsample.datasource.local.helper.SaveDaoHelper
 import com.example.pagingsample.utils.SuspendCallback
 import com.example.pagingsample.utils.TypedCallback
 import kotlinx.coroutines.Dispatchers
@@ -9,7 +8,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class FlowLoader<T> @Inject constructor(
-    private val saveDaoHelper: SaveDaoHelper<T>,
+//    private val saveDaoHelper: SaveDaoHelper<T>,
 ) {
 
     //TODO move dispatcher to constructor
@@ -19,7 +18,7 @@ class FlowLoader<T> @Inject constructor(
     ) = withContext(Dispatchers.IO) {
 
         serverRequest.invoke()?.let { serverData ->
-            saveDaoHelper.save(serverData)
+//            saveDaoHelper.save(serverData)
         }
 
         databaseFlow.invoke()

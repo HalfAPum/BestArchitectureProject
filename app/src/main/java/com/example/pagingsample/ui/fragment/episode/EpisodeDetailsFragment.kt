@@ -14,7 +14,6 @@ import com.example.pagingsample.model.episode.EpisodeWithDetails
 import com.example.pagingsample.ui.adapter.CharacterImageAdapter
 import com.example.pagingsample.ui.decorator.GridItemDecorator
 import com.example.pagingsample.ui.getDimen
-import com.example.pagingsample.ui.launchSubscribeFlow
 import com.example.pagingsample.ui.navigate
 import com.example.pagingsample.viewmodel.DetailsState
 import com.example.pagingsample.viewmodel.DetailsUiAction
@@ -57,9 +56,7 @@ class EpisodeDetailsFragment : Fragment(R.layout.fragment_episode_details) {
 
     private fun render(state: DetailsState) {
         if (state is DetailsState.Data<*>) {
-            launchSubscribeFlow(state.item) {
-                binding.bindUi(it as EpisodeWithDetails)
-            }
+            binding.bindUi(state.item as EpisodeWithDetails)
         }
     }
 
