@@ -9,7 +9,7 @@ class DetailsRepository<D : Any> @Inject constructor(
     private val itemApiHelper: ItemApiHelper<*, D>,
 ) {
 
-    suspend fun getFlowByItemId(id: String) =
+    suspend fun getFlowByItemId(id: Long) =
         itemApiHelper.load(id) ?: throw Exception()
 
 }

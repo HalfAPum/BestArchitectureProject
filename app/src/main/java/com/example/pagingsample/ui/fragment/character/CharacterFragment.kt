@@ -14,7 +14,7 @@ class CharacterFragment : PagingFragment<Character>() {
 
     override val viewModel: CharacterPagingViewModel by viewModels()
 
-    override fun getDetailsNavigationDirection(id: String) =
+    override fun getDetailsNavigationDirection(id: Long) =
         CharacterFragmentDirections.actionToDetails(id)
 
 }

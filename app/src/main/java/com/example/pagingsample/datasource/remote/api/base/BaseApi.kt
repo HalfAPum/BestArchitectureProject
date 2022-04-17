@@ -17,7 +17,7 @@ open class BaseApi<T> @Inject constructor(
         return graphQLExecutor.executeQuery(apiQuery.pagingQuery(page))
     }
 
-    override suspend fun getItemById(id: String) : Query.Data? {
+    override suspend fun getItemById(id: Long) : Query.Data? {
         return graphQLExecutor.executeQuery(apiQuery.itemByIdQuery(id))
     }
 

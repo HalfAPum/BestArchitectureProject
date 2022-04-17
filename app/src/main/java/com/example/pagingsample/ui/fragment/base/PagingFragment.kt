@@ -56,5 +56,5 @@ abstract class PagingFragment<T : Identifiable> : Fragment(R.layout.fragment_ite
         navigate(getDetailsNavigationDirection(sideEffect.id))
     }
 
-    protected abstract fun getDetailsNavigationDirection(id: String) : NavDirections
+    protected abstract fun getDetailsNavigationDirection(id: Long) : NavDirections
 }

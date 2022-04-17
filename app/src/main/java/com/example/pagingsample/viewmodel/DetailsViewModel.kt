@@ -35,7 +35,7 @@ abstract class DetailsViewModel<D : Any> (
         }
     }
 
-    private suspend fun getItemById(id: String) : D {
+    private suspend fun getItemById(id: Long) : D {
         return detailsRepository.getFlowByItemId(id)
     }
 }
@@ -43,8 +43,8 @@ abstract class DetailsViewModel<D : Any> (
 
 
 sealed class DetailsUiAction {
-    data class Update(val id: String) : DetailsUiAction()
-    data class Navigate(val id: String) : DetailsUiAction()
+    data class Update(val id: Long) : DetailsUiAction()
+    data class Navigate(val id: Long) : DetailsUiAction()
 }
 
 

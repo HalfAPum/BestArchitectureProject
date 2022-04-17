@@ -27,7 +27,7 @@ class LocationDetailsFragment : Fragment(R.layout.fragment_location_details) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.observe(viewLifecycleOwner, state = ::render)
-        viewModel.postAction(DetailsUiAction.Update(args.id))
+        viewModel.postAction(DetailsUiAction.Update(args.locationId))
     }
 
     private fun render(state: DetailsState) {

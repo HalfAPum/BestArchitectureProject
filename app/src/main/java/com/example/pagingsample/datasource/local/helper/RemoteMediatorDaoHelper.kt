@@ -17,7 +17,7 @@ open class RemoteMediatorDaoHelper<T : Any> @Inject constructor(
     }
 
     @WorkerThread
-    suspend fun getById(id: String): RemoteKey {
+    suspend fun getById(id: Long): RemoteKey {
         return remoteKeyDao.getById(id)
     }
 

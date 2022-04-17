@@ -14,7 +14,7 @@ class EpisodeFragment : PagingFragment<Episode>() {
 
     override val viewModel: EpisodePagingViewModel by viewModels()
 
-    override fun getDetailsNavigationDirection(id: String) =
+    override fun getDetailsNavigationDirection(id: Long) =
         EpisodeFragmentDirections.actionEpisodesDestToEpisodeDetailsFragment(id)
 
 }

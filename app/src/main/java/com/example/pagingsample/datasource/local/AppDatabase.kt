@@ -20,7 +20,7 @@ import com.example.pagingsample.utils.SuspendVoidCallback
         Location::class,
         Episode::class,
     ],
-    version = 10,
+    version = 11,
     exportSchema = false,
 )
 abstract class AppDatabase : RoomDatabase(), ITransactionManager {

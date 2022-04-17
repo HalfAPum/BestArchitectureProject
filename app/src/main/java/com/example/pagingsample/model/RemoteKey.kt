@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 data class RemoteKey(
     @PrimaryKey
     @ColumnInfo(name = "id")
-    val id: String,
+    val id: Long,
     @ColumnInfo(name ="prev_key")
     val prevKey: Int?,
     @ColumnInfo(name ="next_key")

@@ -52,11 +52,11 @@ open class ItemApiHelper<SERVER : Query.Data, RESULT : Any> @Inject constructor(
     private val mapper: ItemMapper<SERVER, RESULT>
 ) {
 
-    suspend fun load(id: String) : RESULT? {
+    suspend fun load(id: Long) : RESULT? {
         return loadFromServer(id).mapServerData()
     }
 
-    private suspend fun loadFromServer(id: String): SERVER? {
+    private suspend fun loadFromServer(id: Long): SERVER? {
         return itemApi.getItemById(id) as? SERVER
     }
 

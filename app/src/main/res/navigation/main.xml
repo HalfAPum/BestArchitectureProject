@@ -22,7 +22,7 @@
     tools:layout="@layout/fragment_character_details" >
     <argument
       android:name="characterId"
-      app:argType="string" />
+      app:argType="long" />
     <action
       android:id="@+id/action_characterDetailsFragment_to_locationDetailsFragment"
       app:destination="@id/locationDetailsFragment" />
@@ -53,8 +53,8 @@
     android:label="fragment_location_details"
     tools:layout="@layout/fragment_location_details" >
     <argument
-      android:name="id"
-      app:argType="string" />
+      android:name="locationId"
+      app:argType="long" />
   </fragment>
   <fragment
     android:id="@+id/episodeDetailsFragment"
@@ -62,8 +62,8 @@
     android:label="fragment_episode_details"
     tools:layout="@layout/fragment_episode_details" >
     <argument
-      android:name="id"
-      app:argType="string" />
+      android:name="episodeId"
+      app:argType="long" />
     <action
       android:id="@+id/action_episodeDetailsFragment_to_characterDetailsFragment"
       app:destination="@id/characterDetailsFragment" />

@@ -37,7 +37,7 @@ class EpisodeDetailsFragment : Fragment(R.layout.fragment_episode_details) {
         super.onViewCreated(view, savedInstanceState)
         setUpUi()
         viewModel.observe(viewLifecycleOwner, state = ::render, sideEffect = ::sideEffect)
-        viewModel.postAction(DetailsUiAction.Update(args.id))
+        viewModel.postAction(DetailsUiAction.Update(args.episodeId))
     }
 
     private fun setUpUi() {
