@@ -46,6 +46,7 @@ class EpisodeDetailsFragment : Fragment(R.layout.fragment_episode_details) {
             recyclerView.addItemDecoration(GridItemDecorator(getDimen(R.dimen.grid_margin)))
             recyclerView.layoutManager = GridLayoutManager(requireContext(), GRID_SIZE)
             recyclerView.adapter = adapter
+            recyclerView.clipToOutline = true
             adapter.onItemClick = ::onItemClick
         }
     }
