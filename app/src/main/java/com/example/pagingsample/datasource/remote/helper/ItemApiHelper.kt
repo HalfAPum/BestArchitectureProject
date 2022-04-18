@@ -6,7 +6,6 @@ import com.apollographql.apollo3.api.Query
 import com.example.pagingsample.datasource.remote.api.base.BaseApi
 import com.example.pagingsample.datasource.remote.mapper.base.ItemMapper
 import com.example.pagingsample.datasource.remote.mapper.base.ListMapper
-import javax.inject.Inject
 
 /**
  * Main purpose is to provide Base API's helpers that loads data
@@ -18,7 +17,7 @@ import javax.inject.Inject
  * Type [SERVER] means server result.
  * Type [RESULT] means convenient for app use type.
  */
-open class PagingApiHelper<SERVER : Query.Data, RESULT : Any> @Inject constructor(
+open class PagingApiHelper<SERVER : Query.Data, RESULT : Any> constructor(
     private val pagingApi: BaseApi<RESULT>,
     private val mapper: ListMapper<SERVER, RESULT>,
 ) : IPagingApiHelper<RESULT> {
@@ -47,7 +46,7 @@ open class PagingApiHelper<SERVER : Query.Data, RESULT : Any> @Inject constructo
 
 }
 
-open class ItemApiHelper<SERVER : Query.Data, RESULT : Any> @Inject constructor(
+open class ItemApiHelper<SERVER : Query.Data, RESULT : Any> constructor(
     private val itemApi: BaseApi<RESULT>,
     private val mapper: ItemMapper<SERVER, RESULT>
 ) {

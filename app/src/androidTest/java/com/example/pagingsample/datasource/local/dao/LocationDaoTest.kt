@@ -6,12 +6,12 @@ import com.example.pagingsample.datasource.local.dao.base.BaseDaoTest
 import com.example.pagingsample.datasource.local.dao.location.LocationDao
 import com.example.pagingsample.model.location.Location
 import com.example.pagingsample.utils.EmulatedData
-import dagger.hilt.android.testing.HiltAndroidTest
+//import dagger.h/ilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.runner.RunWith
 
 @OptIn(ExperimentalCoroutinesApi::class)
-@HiltAndroidTest
+//@HiltAndroidTest
 @RunWith(AndroidJUnit4::class)
 @SmallTest
 class LocationDaoTest: BaseDaoTest<Location, LocationDao>() {

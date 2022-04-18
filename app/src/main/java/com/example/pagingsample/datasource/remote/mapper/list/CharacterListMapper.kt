@@ -4,9 +4,10 @@ import com.example.CharactersPagingQuery
 import com.example.pagingsample.datasource.remote.mapper.base.ListMapper
 import com.example.pagingsample.datasource.remote.mapper.map
 import com.example.pagingsample.model.character.Character
-import javax.inject.Inject
+import org.koin.core.annotation.Factory
 
-class CharacterListMapper @Inject constructor() : ListMapper<CharactersPagingQuery.Data, Character> {
+@Factory
+class CharacterListMapper constructor() : ListMapper<CharactersPagingQuery.Data, Character> {
 
     override fun map(
         serverData: CharactersPagingQuery.Data

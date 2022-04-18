@@ -11,39 +11,21 @@ import com.example.pagingsample.datasource.remote.mapper.list.LocationListMapper
 import com.example.pagingsample.model.character.Character
 import com.example.pagingsample.model.episode.Episode
 import com.example.pagingsample.model.location.Location
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import kotlinx.coroutines.CoroutineDispatcher
+import com.example.pagingsample.viewmodel.CharacterPaging1ViewModel
 import kotlinx.coroutines.Dispatchers
+import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.dsl.module
 
-@Module
-@InstallIn(SingletonComponent::class)
-object PagingModule {
+val pagingModule = module {
+    viewModel { CharacterPaging1ViewModel(get()) }
 
-    @Provides
-    fun providePagingLoadDispatcher(): CoroutineDispatcher = Dispatchers.IO
+    factory { Dispatchers.IO }
 
-    @Provides
-    fun providePagingConfig() = PagingConfig(
-        pageSize = PagingApi.LOAD_SIZE,
-    )
+    factory { PagingConfig(pageSize = PagingApi.LOAD_SIZE) }
 
-    //TODO REMOVe
-    @Provides
-    fun provideCharacterPagingApiHelper(
-        baseApi: BaseApi<Character>,
-    ) : IPagingApiHelper<Character> = PagingApiHelper(baseApi, CharacterListMapper())
+    genericFactory<IPagingApiHelper<Character>> { PagingApiHelper(genericGet(), CharacterListMapper()) }
+    genericFactory<IPagingApiHelper<Location>> { PagingApiHelper(get(), LocationListMapper()) }
+    genericFactory<IPagingApiHelper<Episode>> { PagingApiHelper(get(), EpisodeListMapper()) }
 
-    @Provides
-    fun provideLocationPagingApiHelper(
-        baseApi: BaseApi<Location>,
-    ) : IPagingApiHelper<Location> = PagingApiHelper(baseApi, LocationListMapper())
-
-    @Provides
-    fun provideEpisodePagingApiHelper(
-        baseApi: BaseApi<Episode>,
-    ) : IPagingApiHelper<Episode> = PagingApiHelper(baseApi, EpisodeListMapper())
-
+    genericFactory { BaseApi<Character>(get(), genericGet()) }
 }

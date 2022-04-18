@@ -6,11 +6,12 @@ import com.example.pagingsample.datasource.remote.api.query.base.BaseApiQuery
 import com.example.pagingsample.model.location.Location
 import com.example.pagingsample.model.location.LocationWithDetails
 import com.example.pagingsample.utils.TypedQuery
-import javax.inject.Inject
+import org.koin.core.annotation.Factory
 
 //TODO THINK ABOUT BETTER APPROACH
 
-class LocationApiQuery @Inject constructor() : BaseApiQuery<Location> {
+@Factory
+class LocationApiQuery constructor() : BaseApiQuery<Location> {
 
     override val pagingQuery: TypedQuery<Int> = { LocationsPagingQuery(it) }
 
@@ -18,7 +19,8 @@ class LocationApiQuery @Inject constructor() : BaseApiQuery<Location> {
 
 }
 
-class LocationDetailsApiQuery @Inject constructor() : BaseApiQuery<LocationWithDetails> {
+@Factory
+class LocationDetailsApiQuery constructor() : BaseApiQuery<LocationWithDetails> {
 
     override val pagingQuery: TypedQuery<Int> = { LocationsPagingQuery(it) }
 

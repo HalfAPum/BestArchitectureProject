@@ -6,14 +6,13 @@ import com.example.pagingsample.model.character.CharacterWithDetails
 import com.example.pagingsample.model.episode.EpisodeWithDetails
 import com.example.pagingsample.model.location.LocationWithDetails
 import com.example.pagingsample.repository.DetailsRepository
-import dagger.hilt.android.lifecycle.HiltViewModel
+import org.koin.android.annotation.KoinViewModel
 import org.orbitmvi.orbit.Container
 import org.orbitmvi.orbit.ContainerHost
 import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.syntax.simple.postSideEffect
 import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
-import javax.inject.Inject
 
 abstract class DetailsViewModel<D : Any> (
     private val detailsRepository: DetailsRepository<D>
@@ -55,18 +54,18 @@ sealed class DetailsState{
 }
 //TODO INVESTIGATE HILT DI AND DELETE THIS CLASSES
 
-@HiltViewModel
-class CharacterDetailsViewModel @Inject constructor(
+@KoinViewModel
+class CharacterDetailsViewModel constructor(
     detailsRepository: DetailsRepository<CharacterWithDetails>
 ) : DetailsViewModel<CharacterWithDetails>(detailsRepository)
 
-@HiltViewModel
-class LocationDetailsViewModel @Inject constructor(
+@KoinViewModel
+class LocationDetailsViewModel  constructor(
     detailsRepository: DetailsRepository<LocationWithDetails>
 ) : DetailsViewModel<LocationWithDetails>(detailsRepository)
 
-@HiltViewModel
-class EpisodeDetailsViewModel @Inject constructor(
+@KoinViewModel
+class EpisodeDetailsViewModel  constructor(
     detailsRepository: DetailsRepository<EpisodeWithDetails>
 ) : DetailsViewModel<EpisodeWithDetails>(detailsRepository)
 

@@ -15,10 +15,10 @@ import com.example.pagingsample.viewmodel.CharacterDetailsViewModel
 import com.example.pagingsample.viewmodel.DetailsState
 import com.example.pagingsample.viewmodel.DetailsUiAction
 import com.example.pagingsample.viewmodel.NavigationSideEffect
-import dagger.hilt.android.AndroidEntryPoint
+//import dagger.hilt.android.AndroidEntryPoint
 import org.orbitmvi.orbit.viewmodel.observe
 
-@AndroidEntryPoint
+//@AndroidEntryPoint
 class CharacterDetailsFragment : Fragment(R.layout.fragment_character_details) {
 
     private val binding: FragmentCharacterDetailsBinding by viewBinding()

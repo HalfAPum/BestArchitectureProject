@@ -12,10 +12,9 @@ import com.example.pagingsample.model.interfaces.Identifiable
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
-class BaseRemoteMediator<T : Identifiable> @Inject constructor(
+class BaseRemoteMediator<T : Identifiable> constructor(
     private val remoteMediatorDaoHelper: RemoteMediatorDaoHelper<T>,
     private val pagingApiHelper: IPagingApiHelper<T>,
     private val loadDispatcher: CoroutineDispatcher = Dispatchers.IO,
@@ -79,15 +78,15 @@ class BaseRemoteMediator<T : Identifiable> @Inject constructor(
     }
 
     @WorkerThread
-    protected suspend fun PagingState<Int, T>.getClosestRemoteKeyForCurrentPosition() =
+    private suspend fun PagingState<Int, T>.getClosestRemoteKeyForCurrentPosition() =
         getItemRemoteKey(findClosestItemToCurrentPosition())
 
     @WorkerThread
-    protected suspend fun PagingState<Int, T>.getRemoteKeyFromFirstLoadedPage() =
+    private suspend fun PagingState<Int, T>.getRemoteKeyFromFirstLoadedPage() =
         getItemRemoteKey(findFirstLoadedItem())
 
     @WorkerThread
-    protected suspend fun PagingState<Int, T>.getRemoteKeyFromLastLoadedPage() =
+    private suspend fun PagingState<Int, T>.getRemoteKeyFromLastLoadedPage() =
         getItemRemoteKey(findLastLoadedItem())
 
 

@@ -13,24 +13,21 @@ import com.example.pagingsample.model.interfaces.Identifiable
 import com.example.pagingsample.ui.adapter.paging.base.BasePagingAdapter
 import com.example.pagingsample.ui.launchSubscribeFlow
 import com.example.pagingsample.ui.navigate
-import com.example.pagingsample.viewmodel.CardClickUiAction
 import com.example.pagingsample.viewmodel.NavigationSideEffect
 import com.example.pagingsample.viewmodel.PagingState
-import com.example.pagingsample.viewmodel.PagingViewModel
-import org.orbitmvi.orbit.viewmodel.observe
 
 abstract class PagingFragment<T : Identifiable> : Fragment(R.layout.fragment_item) {
 
     protected abstract val adapter: BasePagingAdapter<T>
 
-    protected abstract val viewModel: PagingViewModel<T>
+//    protected abstract val viewModel: PagingViewModel<T>
 
     private val binding: FragmentItemBinding by viewBinding()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bindViews()
-        viewModel.observe(viewLifecycleOwner, state = ::render, sideEffect = ::sideEffect)
+//        viewModel.observe(viewLifecycleOwner, state = ::render, sideEffect = ::sideEffect)
     }
 
     @CallSuper
@@ -43,7 +40,7 @@ abstract class PagingFragment<T : Identifiable> : Fragment(R.layout.fragment_ite
     }
 
     private fun onItemClick(item: T) {
-        viewModel.postAction(CardClickUiAction(item))
+//        viewModel.postAction(CardClickUiAction(item))
     }
 
     private fun render(state: PagingState<T>) {

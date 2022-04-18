@@ -7,14 +7,12 @@ import com.example.pagingsample.model.episode.Episode
 import com.example.pagingsample.model.interfaces.Identifiable
 import com.example.pagingsample.model.location.Location
 import com.example.pagingsample.repository.PagingRepository
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import org.orbitmvi.orbit.Container
 import org.orbitmvi.orbit.ContainerHost
 import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.syntax.simple.postSideEffect
 import org.orbitmvi.orbit.viewmodel.container
-import javax.inject.Inject
 
 abstract class PagingViewModel<T : Identifiable> (
     private val pagingRepository: PagingRepository<T>
@@ -40,17 +38,18 @@ data class PagingState<T : Any>(
 data class NavigationSideEffect(val id: Long)
 
 
-@HiltViewModel
-class CharacterPagingViewModel @Inject constructor(
+class CharacterPagingViewModel  constructor(
     itemRepository: PagingRepository<Character>
 ) : PagingViewModel<Character>(itemRepository)
 
-@HiltViewModel
-class LocationPagingViewModel @Inject constructor(
+class CharacterPaging1ViewModel  constructor(
+    val itemRepository: PagingRepository<Character>
+) : ViewModel()
+
+class LocationPagingViewModel  constructor(
     itemRepository: PagingRepository<Location>
 ) : PagingViewModel<Location>(itemRepository)
 
-@HiltViewModel
-class EpisodePagingViewModel @Inject constructor(
+class EpisodePagingViewModel(
     itemRepository: PagingRepository<Episode>
 ) : PagingViewModel<Episode>(itemRepository)

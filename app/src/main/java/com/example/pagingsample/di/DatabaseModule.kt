@@ -2,67 +2,78 @@ package com.example.pagingsample.di
 
 import com.example.pagingsample.datasource.local.AppDatabase
 import com.example.pagingsample.datasource.local.ITransactionManager
-import com.example.pagingsample.datasource.local.dao.RemoteKeyDao
 import com.example.pagingsample.datasource.local.dao.base.BaseDao
 import com.example.pagingsample.datasource.local.dao.base.BaseGetPagingSourceDao
 import com.example.pagingsample.datasource.local.dao.character.CharacterDao
 import com.example.pagingsample.datasource.local.dao.episode.EpisodeDao
 import com.example.pagingsample.datasource.local.dao.location.LocationDao
+import com.example.pagingsample.model.RemoteKey
 import com.example.pagingsample.model.character.Character
 import com.example.pagingsample.model.episode.Episode
 import com.example.pagingsample.model.location.Location
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
+import org.koin.dsl.module
 
-@Module
-@InstallIn(SingletonComponent::class)
-object DatabaseModule {
+val databaseModule = module {
 
-    @Singleton
-    @Provides
-    fun provideTransactionManager(appDatabase: AppDatabase): ITransactionManager = appDatabase
+    fun provideITransactionManager(
+        appDatabase: AppDatabase
+    ): ITransactionManager = appDatabase
+    factory { provideITransactionManager(get()) }
 
-    @Singleton
-    @Provides
-    fun provideCharacterDao(appDatabase: AppDatabase): CharacterDao = appDatabase.characterDao()
 
-    @Singleton
-    @Provides
-    fun provideLocationDao(appDatabase: AppDatabase): LocationDao = appDatabase.locationDao()
+    fun provideCharacterDao(
+        appDatabase: AppDatabase
+    ) = appDatabase.characterDao()
+    factory { provideCharacterDao(get()) }
 
-    @Singleton
-    @Provides
-    fun provideEpisodeDao(appDatabase: AppDatabase): EpisodeDao = appDatabase.episodeDao()
+    fun provideCharacterBaseDao(
+        dao: CharacterDao
+    ) : BaseDao<Character> = dao
+    genericFactory { provideCharacterBaseDao(get()) }
 
-    @Singleton
-    @Provides
-    fun provideRemoteKeyDao(appDatabase: AppDatabase): RemoteKeyDao = appDatabase.remoteKeyDao()
+    fun provideCharacterBasePagingSourceDao(
+        dao: CharacterDao
+    ) : BaseGetPagingSourceDao<Character> = dao
+    genericFactory { provideCharacterBasePagingSourceDao(get()) }
 
-    @Singleton
-    @Provides
-    fun provideBaseDaoCharacter(characterDao: CharacterDao): BaseDao<Character> = characterDao
+    fun provideLocationDao(
+        appDatabase: AppDatabase
+    ) = appDatabase.locationDao()
+    factory { provideLocationDao(get()) }
 
-    @Singleton
-    @Provides
-    fun provideBaseGetPagingSourceDaoCharacter(characterDao: CharacterDao): BaseGetPagingSourceDao<Character> = characterDao
+    fun provideLocationBaseDao(
+        dao: LocationDao
+    ) : BaseDao<Location> = dao
+    genericFactory { provideLocationBaseDao(get()) }
 
-    @Singleton
-    @Provides
-    fun provideBaseDaoLocation(locationDao: LocationDao): BaseDao<Location> = locationDao
+    fun provideLocationBasePagingSourceDao(
+        dao: LocationDao
+    ) : BaseGetPagingSourceDao<Location> = dao
+    genericFactory { provideLocationBasePagingSourceDao(get()) }
 
-    @Singleton
-    @Provides
-    fun provideBaseGetPagingSourceDaoLocation(locationDao: LocationDao): BaseGetPagingSourceDao<Location> = locationDao
+    fun provideEpisodeDao(
+        appDatabase: AppDatabase
+    ) = appDatabase.episodeDao()
+    factory { provideEpisodeDao(get()) }
 
-    @Singleton
-    @Provides
-    fun provideBaseDaoEpisode(episodeDao: EpisodeDao): BaseDao<Episode> = episodeDao
+    fun provideEpisodeBaseDao(
+        dao: EpisodeDao
+    ) : BaseDao<Episode> = dao
+    genericFactory { provideEpisodeBaseDao(get()) }
 
-    @Singleton
-    @Provides
-    fun provideBaseGetPagingSourceDaoEpisode(episodeDao: EpisodeDao): BaseGetPagingSourceDao<Episode> = episodeDao
+    fun provideEpisodeBasePagingSourceDao(
+        dao: EpisodeDao
+    ) : BaseGetPagingSourceDao<Episode> = dao
+    genericFactory { provideEpisodeBasePagingSourceDao(get()) }
+
+    fun provideRemoteKeyDao(
+        appDatabase: AppDatabase
+    ) = appDatabase.remoteKeyDao()
+    factory { provideRemoteKeyDao(get()) }
+
+    fun provideRemoteKeyBaseDao(
+        appDatabase: AppDatabase
+    ): BaseDao<RemoteKey> = appDatabase.remoteKeyDao()
+    genericFactory { provideRemoteKeyBaseDao(get()) }
 
 }

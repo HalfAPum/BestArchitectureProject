@@ -5,9 +5,8 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import com.example.pagingsample.datasource.local.helper.GetPagingSourceDaoHelper
 import com.example.pagingsample.model.interfaces.Identifiable
-import javax.inject.Inject
 
-class PagerWrapper<T : Identifiable> @Inject constructor(
+class PagerWrapper<T : Identifiable> constructor(
     pagingConfig: PagingConfig,
     baseRemoteMediator: BaseRemoteMediator<T>,
     getPagingSourceDaoHelper: GetPagingSourceDaoHelper<T>

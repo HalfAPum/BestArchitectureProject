@@ -2,11 +2,10 @@ package com.example.pagingsample.datasource.remote.api
 
 import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.api.Query
-import javax.inject.Inject
-import javax.inject.Singleton
+import org.koin.core.annotation.Factory
 
-@Singleton
-open class GraphQLExecutor @Inject constructor(
+@Factory
+open class GraphQLExecutor constructor(
     private val apolloClient: ApolloClient
 ) {
 

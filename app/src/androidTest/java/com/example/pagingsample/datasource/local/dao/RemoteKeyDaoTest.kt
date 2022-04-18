@@ -6,14 +6,14 @@ import com.example.pagingsample.datasource.local.dao.base.BaseDaoTest
 import com.example.pagingsample.model.RemoteKey
 import com.example.pagingsample.utils.EmulatedData
 import com.google.common.truth.Truth.assertThat
-import dagger.hilt.android.testing.HiltAndroidTest
+//import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @OptIn(ExperimentalCoroutinesApi::class)
-@HiltAndroidTest
+//@HiltAndroidTest
 @RunWith(AndroidJUnit4::class)
 @SmallTest
 class RemoteKeyDaoTest : BaseDaoTest<RemoteKey, RemoteKeyDao>() {

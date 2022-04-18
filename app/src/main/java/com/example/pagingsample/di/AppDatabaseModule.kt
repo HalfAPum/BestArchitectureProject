@@ -1,27 +1,18 @@
 package com.example.pagingsample.di
 
-import android.content.Context
 import androidx.room.Room
 import com.example.pagingsample.datasource.local.AppDatabase
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
+import org.koin.android.ext.koin.androidApplication
+import org.koin.dsl.module
 
-@Module
-@InstallIn(SingletonComponent::class)
-object AppDatabaseModule {
-
-    @Singleton
-    @Provides
-    fun provideRoomDb(@ApplicationContext applicationContext: Context): AppDatabase {
-        return Room.databaseBuilder(
-            applicationContext,
+val appDatabaseModule = module {
+    single {
+        Room.databaseBuilder(
+            androidApplication(),
             AppDatabase::class.java,
-            "MyDatabase"
+            DATABASE_NAME,
         ).fallbackToDestructiveMigration().build()
     }
-
 }
+//TODO MOVE TO STRINGS and get from contextx
+private const val DATABASE_NAME = "MyDatabase"

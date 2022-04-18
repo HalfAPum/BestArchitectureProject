@@ -12,10 +12,10 @@ import com.example.pagingsample.model.location.LocationWithDetails
 import com.example.pagingsample.viewmodel.DetailsState
 import com.example.pagingsample.viewmodel.DetailsUiAction
 import com.example.pagingsample.viewmodel.LocationDetailsViewModel
-import dagger.hilt.android.AndroidEntryPoint
+//import dagger/.hilt.android.AndroidEntryPoint
 import org.orbitmvi.orbit.viewmodel.observe
 
-@AndroidEntryPoint
+//@AndroidEntryPoint
 class LocationDetailsFragment : Fragment(R.layout.fragment_location_details) {
 
     private val binding: FragmentLocationDetailsBinding by viewBinding()

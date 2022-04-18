@@ -3,12 +3,11 @@ package com.example.pagingsample.datasource.remote.api.base
 import com.apollographql.apollo3.api.Query
 import com.example.pagingsample.datasource.remote.api.GraphQLExecutor
 import com.example.pagingsample.datasource.remote.api.query.base.BaseApiQuery
-import javax.inject.Inject
 
 /**
  * Use generics only for DI purposes.
  */
-open class BaseApi<T> @Inject constructor(
+open class BaseApi<T> constructor(
     private val graphQLExecutor: GraphQLExecutor,
     private val apiQuery: BaseApiQuery<T>,
 ) : PagingApi<T>, ItemApi<T> {

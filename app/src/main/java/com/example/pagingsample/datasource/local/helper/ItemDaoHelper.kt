@@ -6,9 +6,8 @@ import com.example.pagingsample.datasource.local.dao.RemoteKeyDao
 import com.example.pagingsample.datasource.local.dao.base.BaseDao
 import com.example.pagingsample.datasource.local.dao.base.BaseGetPagingSourceDao
 import com.example.pagingsample.model.RemoteKey
-import javax.inject.Inject
 
-open class SaveItemsWithRemoteKeysDaoHelper<T : Any> @Inject constructor(
+open class SaveItemsWithRemoteKeysDaoHelper<T : Any> constructor(
     private val itemDao: BaseDao<T>,
     private val remoteKeyDao: RemoteKeyDao,
     private val transactionManager: ITransactionManager,
@@ -40,7 +39,7 @@ open class SaveItemsWithRemoteKeysDaoHelper<T : Any> @Inject constructor(
 
 }
 
-open class ClearAllItemsAndKeysDaoHelper<T : Any> @Inject constructor(
+open class ClearAllItemsAndKeysDaoHelper<T : Any> constructor(
     private val itemDao: BaseDao<T>,
     private val remoteKeyDao: RemoteKeyDao,
     private val transactionManager: ITransactionManager,
@@ -55,7 +54,7 @@ open class ClearAllItemsAndKeysDaoHelper<T : Any> @Inject constructor(
 
 }
 
-open class GetPagingSourceDaoHelper<T : Any> @Inject constructor(
+open class GetPagingSourceDaoHelper<T : Any> constructor(
     private val itemDao: BaseGetPagingSourceDao<T>,
 ) {
 

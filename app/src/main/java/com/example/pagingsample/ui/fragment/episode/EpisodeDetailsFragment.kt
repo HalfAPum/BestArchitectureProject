@@ -19,10 +19,10 @@ import com.example.pagingsample.viewmodel.DetailsState
 import com.example.pagingsample.viewmodel.DetailsUiAction
 import com.example.pagingsample.viewmodel.EpisodeDetailsViewModel
 import com.example.pagingsample.viewmodel.NavigationSideEffect
-import dagger.hilt.android.AndroidEntryPoint
+//import dagger.hilt.android.AndroidEntryPoint
 import org.orbitmvi.orbit.viewmodel.observe
 
-@AndroidEntryPoint
+//@AndroidEntryPoint
 class EpisodeDetailsFragment : Fragment(R.layout.fragment_episode_details) {
 
     private val binding: FragmentEpisodeDetailsBinding by viewBinding()

@@ -1,5 +1,7 @@
 package com.example.pagingsample.datasource.remote.api
 
+//import dagger.hilt.android.testing.HiltAndroidTest
+//import dagger.hilt.android.testing.HiltTestApplication
 import com.HiltTest
 import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.exception.ApolloHttpException
@@ -7,8 +9,6 @@ import com.apollographql.apollo3.mockserver.MockResponse
 import com.apollographql.apollo3.mockserver.MockServer
 import com.example.CharactersPagingQuery
 import com.google.common.truth.Truth.assertThat
-import dagger.hilt.android.testing.HiltAndroidTest
-import dagger.hilt.android.testing.HiltTestApplication
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.After
@@ -16,12 +16,11 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.annotation.Config
 import javax.inject.Inject
 
-@HiltAndroidTest
+//@HiltAnd/roidTest
 @RunWith(RobolectricTestRunner::class)
-@Config(application = HiltTestApplication::class)
+//@Config(application = HiltTestApplication::class)
 @OptIn(ExperimentalCoroutinesApi::class)
 class MockServerTest : HiltTest {
 

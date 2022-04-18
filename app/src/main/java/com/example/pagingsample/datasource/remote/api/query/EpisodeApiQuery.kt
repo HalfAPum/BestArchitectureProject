@@ -6,9 +6,10 @@ import com.example.pagingsample.datasource.remote.api.query.base.BaseApiQuery
 import com.example.pagingsample.model.episode.Episode
 import com.example.pagingsample.model.episode.EpisodeWithDetails
 import com.example.pagingsample.utils.TypedQuery
-import javax.inject.Inject
+import org.koin.core.annotation.Factory
 
-class EpisodeApiQuery @Inject constructor() : BaseApiQuery<Episode> {
+@Factory
+class EpisodeApiQuery constructor() : BaseApiQuery<Episode> {
 
     override val pagingQuery: TypedQuery<Int> = { EpisodesPagingQuery(it) }
 
@@ -16,7 +17,8 @@ class EpisodeApiQuery @Inject constructor() : BaseApiQuery<Episode> {
 
 }
 
-class EpisodeDetailsApiQuery @Inject constructor() : BaseApiQuery<EpisodeWithDetails> {
+@Factory
+class EpisodeDetailsApiQuery constructor() : BaseApiQuery<EpisodeWithDetails> {
 
     override val pagingQuery: TypedQuery<Int> = { EpisodesPagingQuery(it) }
 

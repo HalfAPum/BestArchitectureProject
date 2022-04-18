@@ -1,77 +1,69 @@
 package com.example.pagingsample.di
 
-import com.example.CharacterByIdQuery
-import com.example.EpisodeByIdQuery
-import com.example.LocationByIdQuery
+import android.os.Build
+import androidx.annotation.RequiresApi
+import com.example.pagingsample.datasource.local.helper.ClearAllItemsAndKeysDaoHelper
+import com.example.pagingsample.datasource.local.helper.GetPagingSourceDaoHelper
+import com.example.pagingsample.datasource.local.helper.RemoteMediatorDaoHelper
+import com.example.pagingsample.datasource.local.helper.SaveItemsWithRemoteKeysDaoHelper
+import com.example.pagingsample.datasource.paging.BaseRemoteMediator
+import com.example.pagingsample.datasource.paging.PagerWrapper
 import com.example.pagingsample.datasource.remote.api.query.*
-import com.example.pagingsample.datasource.remote.api.query.base.BaseApiQuery
-import com.example.pagingsample.datasource.remote.helper.ItemApiHelper
-import com.example.pagingsample.datasource.remote.mapper.base.ItemMapper
-import com.example.pagingsample.datasource.remote.mapper.item.CharacterDetailsMapper
-import com.example.pagingsample.datasource.remote.mapper.item.EpisodeDetailsMapper
-import com.example.pagingsample.datasource.remote.mapper.item.LocationDetailsMapper
 import com.example.pagingsample.model.character.Character
-import com.example.pagingsample.model.character.CharacterWithDetails
-import com.example.pagingsample.model.episode.Episode
-import com.example.pagingsample.model.episode.EpisodeWithDetails
-import com.example.pagingsample.model.location.Location
-import com.example.pagingsample.model.location.LocationWithDetails
-import dagger.Binds
-import dagger.Module
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
+import com.example.pagingsample.repository.PagingRepository
+import org.koin.core.definition.Definition
+import org.koin.core.module.Module
+import org.koin.core.qualifier.Qualifier
+import org.koin.core.qualifier.named
+import org.koin.core.scope.Scope
+import org.koin.dsl.module
+import timber.log.Timber
+import java.lang.reflect.ParameterizedType
 
-@Module
-@InstallIn(SingletonComponent::class)
-abstract class WebServiceModule {
+/**
+ * Generic factory for one generic type object.
+ */
+inline fun <reified T> Module.genericFactory(
+    noinline definition: Definition<T>
+) = factory(genericQualifier<T>(), definition)
 
-    @Binds
-    abstract fun bindCharacterApiQuery(apiQuery: CharacterApiQuery): BaseApiQuery<Character>
+inline fun <reified T : Any> Scope.genericGet(): T {
+    return get(genericQualifier<T>())
+}
 
-    @Binds
-    abstract fun bindLocationApiQuery(apiQuery: LocationApiQuery): BaseApiQuery<Location>
+@RequiresApi(Build.VERSION_CODES.P)
+inline fun <reified T> genericQualifier(): Qualifier? {
+    val classType = T::class.java
+    val parameterizedType = (classType.genericSuperclass as? ParameterizedType)
+        ?: classType.genericInterfaces.firstOrNull() as? ParameterizedType
+    Timber.d("tag1 LOL WTF ${parameterizedType?.actualTypeArguments?.firstOrNull() ?: parameterizedType?.actualTypeArguments?.get(1)}")
+    return parameterizedType?.actualTypeArguments?.firstOrNull()?.let { named(it.toString()) }
+}
 
-    @Binds
-    abstract fun bindEpisodeApiQuery(apiQuery: EpisodeApiQuery): BaseApiQuery<Episode>
+val webServiceModule = module {
+    genericFactory { CharacterApiQuery() }
+    genericFactory { LocationApiQuery() }
+    genericFactory { EpisodeApiQuery() }
 
-    @Binds
-    abstract fun bindCharacterDetailsApiQuery(apiQuery: CharacterDetailsApiQuery): BaseApiQuery<CharacterWithDetails>
+    genericFactory { CharacterDetailsApiQuery() }
+    genericFactory { LocationDetailsApiQuery() }
+    genericFactory { EpisodeDetailsApiQuery() }
 
-    @Binds
-    abstract fun bindLocationDetailsApiQuery(apiQuery: LocationDetailsApiQuery): BaseApiQuery<LocationWithDetails>
+//    genericFactory<ItemApiHelper<*, CharacterWithDetails>> { ItemApiHelper(get(), CharacterDetailsMapper()) }
+//    genericFactory<ItemApiHelper<*, LocationWithDetails>> { ItemApiHelper(get(), LocationDetailsMapper()) }
+//    genericFactory<ItemApiHelper<*, EpisodeWithDetails>> { ItemApiHelper(get(), EpisodeDetailsMapper()) }
 
-    @Binds
-    abstract fun bindEpisodeDetailsApiQuery(apiQuery: EpisodeDetailsApiQuery): BaseApiQuery<EpisodeWithDetails>
+    factory { PagingRepository<Character>(get()) }
 
-    @Binds
-    abstract fun bindCharacterItemApiHelper(
-        itemApiHelper: ItemApiHelper<CharacterByIdQuery.Data, CharacterWithDetails>
-    ) : ItemApiHelper<*, CharacterWithDetails>
+    factory { PagerWrapper<Character>(get(), get(), genericGet()) }
 
-    @Binds
-    abstract fun bindLocationItemApiHelper(
-        itemApiHelper: ItemApiHelper<LocationByIdQuery.Data, LocationWithDetails>
-    ) : ItemApiHelper<*, LocationWithDetails>
+    genericFactory { GetPagingSourceDaoHelper<Character>(genericGet()) }
 
-    @Binds
-    abstract fun bindEpisodeItemApiHelper(
-        itemApiHelper: ItemApiHelper<EpisodeByIdQuery.Data, EpisodeWithDetails>
-    ) : ItemApiHelper<*, EpisodeWithDetails>
+    factory { BaseRemoteMediator<Character>(get(), genericGet()) }
 
+    factory { RemoteMediatorDaoHelper<Character>(get(), get(), get()) }
 
-    @Binds
-    abstract fun bindCharacterWithDetailsItemMapper(
-        itemMapper: CharacterDetailsMapper
-    ) : ItemMapper<CharacterByIdQuery.Data, CharacterWithDetails>
+    factory { SaveItemsWithRemoteKeysDaoHelper<Character>(genericGet(), get(), get()) }
 
-    @Binds
-    abstract fun bindLocationWithDetailsItemMapper(
-        itemMapper: LocationDetailsMapper
-    ) : ItemMapper<LocationByIdQuery.Data, LocationWithDetails>
-
-    @Binds
-    abstract fun bindEpisodeWithDetailsItemMapper(
-        itemMapper: EpisodeDetailsMapper
-    ) : ItemMapper<EpisodeByIdQuery.Data, EpisodeWithDetails>
-
+    factory { ClearAllItemsAndKeysDaoHelper<Character>(genericGet(), get(), get()) }
 }

@@ -4,11 +4,14 @@ import com.example.EpisodeByIdQuery
 import com.example.pagingsample.datasource.remote.mapper.base.ItemMapper
 import com.example.pagingsample.datasource.remote.mapper.map
 import com.example.pagingsample.model.episode.EpisodeWithDetails
-import javax.inject.Inject
-import javax.inject.Singleton
+import org.koin.core.annotation.Factory
 
-@Singleton
-class EpisodeDetailsMapper @Inject constructor() : ItemMapper<EpisodeByIdQuery.Data, EpisodeWithDetails> {
+//import javax.inject.Inject
+//import javax.inject.Singleton
+
+//@Singleton
+@Factory
+class EpisodeDetailsMapper constructor() : ItemMapper<EpisodeByIdQuery.Data, EpisodeWithDetails> {
 
     override fun map(serverData: EpisodeByIdQuery.Data): EpisodeWithDetails? {
         return serverData.map()

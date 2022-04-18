@@ -10,9 +10,9 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.pagingsample.R
 import com.example.pagingsample.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationBarView
-import dagger.hilt.android.AndroidEntryPoint
+//import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
+//@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private val binding: ActivityMainBinding by viewBinding()
