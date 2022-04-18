@@ -63,8 +63,8 @@ class EpisodeDetailsFragment : Fragment(R.layout.fragment_episode_details) {
     private fun FragmentEpisodeDetailsBinding.bindUi(item: EpisodeWithDetails) {
         name.text = item.episode.name
         name.isSelected = true
-        airDate.text = item.episode.airDate
-        created.text = item.detailsWithCharacters.details.created
+        airDate.text = getString(R.string.air_date, item.episode.airDate)
+        created.text = getString(R.string.created, item.detailsWithCharacters.details.created)
         episodeCode.text = item.detailsWithCharacters.details.episodeCode
         adapter.update(item.detailsWithCharacters.characters)
     }
