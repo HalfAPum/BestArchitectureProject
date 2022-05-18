@@ -48,7 +48,7 @@ sealed class DetailsUiAction {
 }
 
 
-sealed class DetailsState{
+sealed class DetailsState {
     object Loading : DetailsState()
     class Data<D>(val item: D) : DetailsState()
     object Error : DetailsState()

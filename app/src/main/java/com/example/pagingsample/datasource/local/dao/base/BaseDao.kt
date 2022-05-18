@@ -3,7 +3,9 @@ package com.example.pagingsample.datasource.local.dao.base
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.Companion.REPLACE
+import androidx.room.RawQuery
 import androidx.room.Update
+import androidx.sqlite.db.SimpleSQLiteQuery
 
 interface BaseDao<T> {
 
@@ -26,10 +28,10 @@ interface BaseDao<T> {
     @Delete
     suspend fun delete(items: List<T>)
 
-    @JvmSuppressWildcards
-    suspend fun clear()
+    @RawQuery
+    suspend fun clear(query: SimpleSQLiteQuery): Long
 
-    @JvmSuppressWildcards
-    suspend fun getAll(): List<T>
+    @RawQuery
+    suspend fun getAll(query: SimpleSQLiteQuery): List<T>
 
 }
