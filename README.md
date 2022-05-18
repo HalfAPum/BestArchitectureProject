@@ -1,13 +1,5 @@
-# BestArchitectureProject
+# Playground
 
-This project is MY prefect representation of app architecture.
-If you have any ideas how to improve it you are welcome.
-Create new issues and discuss project.
-
-# State
-
-Now is not stable and in ACTIVE development process. First release planned to 10.05.2022.
-
-# Contribution
-
-Create pull request or ask questions.
+This project is MY playground with different tools and modern technologies.
+Represents my coding style and ideas I'm working on.
+Some decisions aren't finished and may looks silly.
