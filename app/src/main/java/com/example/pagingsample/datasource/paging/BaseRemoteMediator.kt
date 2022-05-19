@@ -47,7 +47,7 @@ class BaseRemoteMediator<T : Identifiable> @Inject constructor(
                 remoteMediatorDaoHelper.clearTables()
             }
 
-            data.saveToCache(page)
+            data.saveToCache(page = page)
         }
     }
 
@@ -66,9 +66,6 @@ class BaseRemoteMediator<T : Identifiable> @Inject constructor(
             val remoteKey = state.getClosestRemoteKeyForCurrentPosition()
             val position = remoteKey?.nextKey?.prevKey ?: startPage
 
-            //Clear needed tables if this is new load
-
-
             PageResult(position)
         }
         LoadType.PREPEND -> {
@@ -82,15 +79,15 @@ class BaseRemoteMediator<T : Identifiable> @Inject constructor(
     }
 
     @WorkerThread
-    protected suspend fun PagingState<Int, T>.getClosestRemoteKeyForCurrentPosition() =
+    private suspend fun PagingState<Int, T>.getClosestRemoteKeyForCurrentPosition() =
         getItemRemoteKey(findClosestItemToCurrentPosition())
 
     @WorkerThread
-    protected suspend fun PagingState<Int, T>.getRemoteKeyFromFirstLoadedPage() =
+    private suspend fun PagingState<Int, T>.getRemoteKeyFromFirstLoadedPage() =
         getItemRemoteKey(findFirstLoadedItem())
 
     @WorkerThread
-    protected suspend fun PagingState<Int, T>.getRemoteKeyFromLastLoadedPage() =
+    private suspend fun PagingState<Int, T>.getRemoteKeyFromLastLoadedPage() =
         getItemRemoteKey(findLastLoadedItem())
 
 

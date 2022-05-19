@@ -14,7 +14,7 @@ class LocationApiQuery @Inject constructor() : BaseApiQuery<Location> {
 
     override val pagingQuery: TypedQuery<Int> = { LocationsPagingQuery(it) }
 
-    override val itemByIdQuery: TypedQuery<String> = { LocationByIdQuery(it) }
+    override val itemByIdQuery: TypedQuery<Long> = { LocationByIdQuery(it.toString()) }
 
 }
 
@@ -22,6 +22,6 @@ class LocationDetailsApiQuery @Inject constructor() : BaseApiQuery<LocationWithD
 
     override val pagingQuery: TypedQuery<Int> = { LocationsPagingQuery(it) }
 
-    override val itemByIdQuery: TypedQuery<String> = { LocationByIdQuery(it) }
+    override val itemByIdQuery: TypedQuery<Long> = { LocationByIdQuery(it.toString()) }
 
 }

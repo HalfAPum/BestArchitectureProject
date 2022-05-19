@@ -10,7 +10,7 @@ import coil.load
 import com.example.pagingsample.R
 import com.example.pagingsample.databinding.FragmentCharacterDetailsBinding
 import com.example.pagingsample.model.character.CharacterWithDetails
-import com.example.pagingsample.ui.launchSubscribeFlow
+import com.example.pagingsample.ui.navigate
 import com.example.pagingsample.viewmodel.CharacterDetailsViewModel
 import com.example.pagingsample.viewmodel.DetailsState
 import com.example.pagingsample.viewmodel.DetailsUiAction
@@ -35,9 +35,7 @@ class CharacterDetailsFragment : Fragment(R.layout.fragment_character_details) {
 
     private fun render(state: DetailsState) {
         if (state is DetailsState.Data<*>) {
-            launchSubscribeFlow(state.item) {
-                binding.bindUi(it as CharacterWithDetails)
-            }
+            binding.bindUi(state.item as CharacterWithDetails)
         }
     }
 
@@ -55,7 +53,11 @@ class CharacterDetailsFragment : Fragment(R.layout.fragment_character_details) {
     }
 
     private fun sideEffect(sideEffect: NavigationSideEffect) {
-//        navigate()
+        navigate(CharacterDetailsFragmentDirections
+            .actionCharacterDetailsFragmentToLocationDetailsFragment(
+                sideEffect.id
+            )
+        )
     }
 
 }

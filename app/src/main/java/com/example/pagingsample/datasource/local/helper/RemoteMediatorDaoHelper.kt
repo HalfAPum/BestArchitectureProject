@@ -7,8 +7,8 @@ import javax.inject.Inject
 
 open class RemoteMediatorDaoHelper<T : Any> @Inject constructor(
     private val saveDataWithRemoteKeysDaoHelper: SaveItemsWithRemoteKeysDaoHelper<T>,
-    private val remoteKeyDao: RemoteKeyDao,
     private val cleanerDaoHelper: ClearAllItemsAndKeysDaoHelper<T>,
+    private val remoteKeyDao: RemoteKeyDao,
 ) {
 
     @WorkerThread
@@ -17,13 +17,13 @@ open class RemoteMediatorDaoHelper<T : Any> @Inject constructor(
     }
 
     @WorkerThread
-    suspend fun getById(id: String): RemoteKey {
-        return remoteKeyDao.getById(id)
+    suspend fun save(items: List<T>, remoteKeys: List<RemoteKey>) {
+        saveDataWithRemoteKeysDaoHelper.save(items, remoteKeys)
     }
 
     @WorkerThread
-    suspend fun save(items: List<T>, remoteKeys: List<RemoteKey>) {
-        saveDataWithRemoteKeysDaoHelper.save(items, remoteKeys)
+    suspend fun getById(id: Long): RemoteKey {
+        return remoteKeyDao.getById(id)
     }
 
 }

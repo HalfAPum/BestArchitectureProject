@@ -12,7 +12,7 @@ class CharacterApiQuery @Inject constructor() : BaseApiQuery<Character> {
 
     override val pagingQuery: TypedQuery<Int> = { CharactersPagingQuery(it) }
 
-    override val itemByIdQuery: TypedQuery<String> = { CharacterByIdQuery(it) }
+    override val itemByIdQuery: TypedQuery<Long> = { CharacterByIdQuery(it.toString()) }
 
 }
 
@@ -20,6 +20,6 @@ class CharacterDetailsApiQuery @Inject constructor() : BaseApiQuery<CharacterWit
 
     override val pagingQuery: TypedQuery<Int> = { CharactersPagingQuery(it) }
 
-    override val itemByIdQuery: TypedQuery<String> = { CharacterByIdQuery(it) }
+    override val itemByIdQuery: TypedQuery<Long> = { CharacterByIdQuery(it.toString()) }
 
 }

@@ -12,7 +12,7 @@ class EpisodeApiQuery @Inject constructor() : BaseApiQuery<Episode> {
 
     override val pagingQuery: TypedQuery<Int> = { EpisodesPagingQuery(it) }
 
-    override val itemByIdQuery: TypedQuery<String> = { EpisodeByIdQuery(it) }
+    override val itemByIdQuery: TypedQuery<Long> = { EpisodeByIdQuery(it.toString()) }
 
 }
 
@@ -20,6 +20,6 @@ class EpisodeDetailsApiQuery @Inject constructor() : BaseApiQuery<EpisodeWithDet
 
     override val pagingQuery: TypedQuery<Int> = { EpisodesPagingQuery(it) }
 
-    override val itemByIdQuery: TypedQuery<String> = { EpisodeByIdQuery(it) }
+    override val itemByIdQuery: TypedQuery<Long> = { EpisodeByIdQuery(it.toString()) }
 
 }

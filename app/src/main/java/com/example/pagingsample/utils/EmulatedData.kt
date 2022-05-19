@@ -7,26 +7,26 @@ import com.example.pagingsample.model.location.Location
 
 object EmulatedData {
 
-    val character = Character("70","Concerto", "http/image1", "Alive", "Male")
+    val character = Character(70,"Concerto", "http/image1", "Alive", "Male")
 
     val characterList = listOf(
-        Character("815","Punk Rick", "http/image2", "Alive", "Male"),
-        Character("354","Toby Matthews", "http/image3", "Dead", "Male"),
-        Character("759","Turkey Morty", "http/image4", "Unknown", "Female"),
+        Character(815,"Punk Rick", "http/image2", "Alive", "Male"),
+        Character(354,"Toby Matthews", "http/image3", "Dead", "Male"),
+        Character(759,"Turkey Morty", "http/image4", "Unknown", "Female"),
     )
-    val location = Location("70","Concerto")
+    val location = Location(70,"Concerto")
 
     val locationList = listOf(
-        Location("815","Punk Rick"),
-        Location("354","Toby Matthews"),
-        Location("759","Turkey Morty"),
+        Location(815,"Punk Rick"),
+        Location(354,"Toby Matthews"),
+        Location(759,"Turkey Morty"),
     )
-    val episode = Episode("70","Concerto", "07-12-2021")
+    val episode = Episode(70,"Concerto", "07-12-2021")
 
     val episodeList = listOf(
-        Episode("815","Punk Rick", "01-30-2017"),
-        Episode("354","Toby Matthews", "11-10-2019"),
-        Episode("759","Turkey Morty", "03-06-2022"),
+        Episode(815,"Punk Rick", "01-30-2017"),
+        Episode(354,"Toby Matthews", "11-10-2019"),
+        Episode(759,"Turkey Morty", "03-06-2022"),
     )
 
     //    val character = Character("70","Concerto","Dead","Humanoid","",
@@ -45,12 +45,12 @@ object EmulatedData {
 //            "https://rickandmortyapi.com/api/character/avatar/759.jpeg", "2021-10-17T15:01:58.524Z"),
 //    )
 
-    val remoteKey = RemoteKey("1", null, 2)
+    val remoteKey = RemoteKey(1, null, 2)
 
     val remoteKeyList = listOf(
-        RemoteKey("2", null, 2),
-        RemoteKey("3", null, 2),
-        RemoteKey("4", 1, 3),
+        RemoteKey(2, null, 2),
+        RemoteKey(3, null, 2),
+        RemoteKey(4, 1, 3),
     )
 
 }

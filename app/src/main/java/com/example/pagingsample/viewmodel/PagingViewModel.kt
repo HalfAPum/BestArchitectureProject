@@ -37,7 +37,7 @@ data class PagingState<T : Any>(
     val data: Flow<PagingData<T>>
 )
 
-data class NavigationSideEffect(val id: String)
+data class NavigationSideEffect(val id: Long)
 
 
 @HiltViewModel

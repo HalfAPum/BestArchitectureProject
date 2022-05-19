@@ -17,14 +17,14 @@ fun CharactersPagingQuery.Data.map() = characters.results.mapCharacters()
 private fun List<CharactersPagingQuery.Result>.mapCharacters() = map { it.toCharacter() }
 
 private fun CharactersPagingQuery.Result.toCharacter(): Character {
-    return Character(id, name, image, status, gender)
+    return Character(id.toLong(), name, image, status, gender)
 }
 
 fun CharacterByIdQuery.Data.map() = character?.map()
 
 private fun CharacterByIdQuery.Character.map() = CharacterWithDetails(
-    Character(id, name, image, status, gender),
-    CharacterDetails(id, created, location?.id),
+    Character(id.toLong(), name, image, status, gender),
+    CharacterDetails(id.toLong(), created, location?.id?.toLong()),
 )
 
 fun LocationsPagingQuery.Data.map() = locations.results.mapLocations()
@@ -32,13 +32,13 @@ fun LocationsPagingQuery.Data.map() = locations.results.mapLocations()
 private fun List<LocationsPagingQuery.Result>.mapLocations() = map { it.toLocation() }
 
 private fun LocationsPagingQuery.Result.toLocation(): Location {
-    return Location(id, name)
+    return Location(id.toLong(), name)
 }
 
 fun LocationByIdQuery.Data.map() = location?.map()
 
 private fun LocationByIdQuery.Location.map() = LocationWithDetails(
-    Location(id, name),
+    Location(id.toLong(), name),
     LocationDetails(id, type, dimension),
 )
 
@@ -47,13 +47,13 @@ fun EpisodesPagingQuery.Data.map() = episodes.results.mapEpisodes()
 private fun List<EpisodesPagingQuery.Result>.mapEpisodes() = map { it.toEpisode() }
 
 private fun EpisodesPagingQuery.Result.toEpisode(): Episode {
-    return Episode(id, name, air_date)
+    return Episode(id.toLong(), name, air_date)
 }
 
 fun EpisodeByIdQuery.Data.map() = episode?.map()
 
 private fun EpisodeByIdQuery.Episode.map() = EpisodeWithDetails(
-    Episode(id, name, air_date),
+    Episode(id.toLong(), name, air_date),
     EpisodeDetailsWithCharacters(
         EpisodeDetails(id, created, episode),
         characters.mapCharacter()
@@ -61,4 +61,4 @@ private fun EpisodeByIdQuery.Episode.map() = EpisodeWithDetails(
 )
 
 private fun List<EpisodeByIdQuery.Character?>.mapCharacter() =
-    filterNotNull().map { Character(it.id, image = it.image) }
+    filterNotNull().map { Character(it.id.toLong(), image = it.image) }

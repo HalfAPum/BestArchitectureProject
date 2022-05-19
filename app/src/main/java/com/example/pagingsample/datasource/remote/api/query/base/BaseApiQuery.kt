@@ -6,6 +6,6 @@ interface BaseApiQuery<T> {
 
     val pagingQuery: TypedQuery<Int>
 
-    val itemByIdQuery: TypedQuery<String>
+    val itemByIdQuery: TypedQuery<Long>
 
 }

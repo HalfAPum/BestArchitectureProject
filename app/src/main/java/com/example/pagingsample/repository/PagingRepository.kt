@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 @ViewModelScoped
 class PagingRepository<T : Identifiable> @Inject constructor(
-    private val pagerWrapper: PagerWrapper<T>
+    private val pagerWrapper: PagerWrapper<T>,
 ) {
 
     fun getItemPagingFlow() = pagerWrapper.flow

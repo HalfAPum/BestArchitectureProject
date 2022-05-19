@@ -3,6 +3,7 @@ package com.example.pagingsample.di
 import android.content.Context
 import androidx.room.Room
 import com.example.pagingsample.datasource.local.AppDatabase
+import com.example.pagingsample.datasource.local.ITransactionManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,5 +24,8 @@ object AppDatabaseModule {
             "MyDatabase"
         ).fallbackToDestructiveMigration().build()
     }
+
+    @Provides
+    fun provideTransactionManager(appDatabase: AppDatabase): ITransactionManager = appDatabase
 
 }

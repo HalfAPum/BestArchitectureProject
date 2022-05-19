@@ -8,15 +8,7 @@ import com.example.pagingsample.model.RemoteKey
 @Dao
 interface RemoteKeyDao : BaseDao<RemoteKey> {
 
-    @Query("DELETE FROM RemoteKey")
-    @JvmSuppressWildcards
-    override suspend fun clear()
-
     @Query("SELECT * FROM RemoteKey WHERE id = :id")
-    suspend fun getById(id: String): RemoteKey
-
-    @Query("SELECT * FROM RemoteKey")
-    @JvmSuppressWildcards
-    override suspend fun getAll(): List<RemoteKey>
+    suspend fun getById(id: Long): RemoteKey
 
 }

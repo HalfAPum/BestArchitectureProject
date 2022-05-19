@@ -9,7 +9,6 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.pagingsample.R
 import com.example.pagingsample.databinding.FragmentLocationDetailsBinding
 import com.example.pagingsample.model.location.LocationWithDetails
-import com.example.pagingsample.ui.launchSubscribeFlow
 import com.example.pagingsample.viewmodel.DetailsState
 import com.example.pagingsample.viewmodel.DetailsUiAction
 import com.example.pagingsample.viewmodel.LocationDetailsViewModel
@@ -28,14 +27,12 @@ class LocationDetailsFragment : Fragment(R.layout.fragment_location_details) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.observe(viewLifecycleOwner, state = ::render)
-        viewModel.postAction(DetailsUiAction.Update(args.id))
+        viewModel.postAction(DetailsUiAction.Update(args.locationId))
     }
 
     private fun render(state: DetailsState) {
         if (state is DetailsState.Data<*>) {
-            launchSubscribeFlow(state.item) {
-                binding.bindUi(it as LocationWithDetails)
-            }
+            binding.bindUi(state.item as LocationWithDetails)
         }
     }
 

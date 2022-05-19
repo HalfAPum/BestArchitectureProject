@@ -3,7 +3,6 @@ package com.example.pagingsample.di
 import com.example.CharacterByIdQuery
 import com.example.EpisodeByIdQuery
 import com.example.LocationByIdQuery
-import com.example.pagingsample.datasource.local.helper.*
 import com.example.pagingsample.datasource.remote.api.query.*
 import com.example.pagingsample.datasource.remote.api.query.base.BaseApiQuery
 import com.example.pagingsample.datasource.remote.helper.ItemApiHelper
@@ -44,15 +43,6 @@ abstract class WebServiceModule {
     @Binds
     abstract fun bindEpisodeDetailsApiQuery(apiQuery: EpisodeDetailsApiQuery): BaseApiQuery<EpisodeWithDetails>
 
-//    @Binds
-//    abstract fun bindCharacterWithDetailsApiQuery(apiQuery: CharacterApiQuery): BaseApiQuery<CharacterWithDetails>
-//
-//    @Binds
-//    abstract fun bindLocationWithDetailsApiQuery(apiQuery: LocationApiQuery): BaseApiQuery<LocationWithDetails>
-//
-//    @Binds
-//    abstract fun bindEpisodeWithDetailsApiQuery(apiQuery: EpisodeApiQuery): BaseApiQuery<EpisodeWithDetails>
-
     @Binds
     abstract fun bindCharacterItemApiHelper(
         itemApiHelper: ItemApiHelper<CharacterByIdQuery.Data, CharacterWithDetails>
@@ -83,36 +73,5 @@ abstract class WebServiceModule {
     abstract fun bindEpisodeWithDetailsItemMapper(
         itemMapper: EpisodeDetailsMapper
     ) : ItemMapper<EpisodeByIdQuery.Data, EpisodeWithDetails>
-
-
-    @Binds
-    abstract fun bindCharacterDetailsSaveDaoHelper(
-        helper: SaveCharacterDetailsDaoHelper
-    ): SaveDaoHelper<CharacterWithDetails>
-
-    @Binds
-    abstract fun bindLocationDetailsSaveDaoHelper(
-        helper: SaveLocationDetailsDaoHelper
-    ): SaveDaoHelper<LocationWithDetails>
-
-    @Binds
-    abstract fun bindEpisodeDetailsSaveDaoHelper(
-        helper: SaveEpisodeDetailsDaoHelper
-    ): SaveDaoHelper<EpisodeWithDetails>
-
-    @Binds
-    abstract fun bindCharacterDetailsLoadFlow(
-        helper: LoadCharacterWithDetailsFlowDaoHelper
-    ) : LoadFlowDaoHelper<CharacterWithDetails>
-
-    @Binds
-    abstract fun bindLocationDetailsLoadFlow(
-        helper: LoadLocationWithDetailsFlowDaoHelper
-    ) : LoadFlowDaoHelper<LocationWithDetails>
-
-    @Binds
-    abstract fun bindEpisodeDetailsLoadFlow(
-        helper: LoadEpisodeWithDetailsFlowDaoHelper
-    ) : LoadFlowDaoHelper<EpisodeWithDetails>
 
 }

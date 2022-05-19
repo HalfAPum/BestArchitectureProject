@@ -4,5 +4,5 @@ import com.apollographql.apollo3.api.Query
 
 interface ItemApi<T> {
 
-    suspend fun getItemById(id: String) : Query.Data?
+    suspend fun getItemById(id: Long) : Query.Data?
 }

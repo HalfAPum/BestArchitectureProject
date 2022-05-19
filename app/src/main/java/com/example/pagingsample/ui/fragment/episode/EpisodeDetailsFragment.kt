@@ -14,7 +14,6 @@ import com.example.pagingsample.model.episode.EpisodeWithDetails
 import com.example.pagingsample.ui.adapter.CharacterImageAdapter
 import com.example.pagingsample.ui.decorator.GridItemDecorator
 import com.example.pagingsample.ui.getDimen
-import com.example.pagingsample.ui.launchSubscribeFlow
 import com.example.pagingsample.ui.navigate
 import com.example.pagingsample.viewmodel.DetailsState
 import com.example.pagingsample.viewmodel.DetailsUiAction
@@ -38,7 +37,7 @@ class EpisodeDetailsFragment : Fragment(R.layout.fragment_episode_details) {
         super.onViewCreated(view, savedInstanceState)
         setUpUi()
         viewModel.observe(viewLifecycleOwner, state = ::render, sideEffect = ::sideEffect)
-        viewModel.postAction(DetailsUiAction.Update(args.id))
+        viewModel.postAction(DetailsUiAction.Update(args.episodeId))
     }
 
     private fun setUpUi() {
@@ -46,6 +45,7 @@ class EpisodeDetailsFragment : Fragment(R.layout.fragment_episode_details) {
             recyclerView.addItemDecoration(GridItemDecorator(getDimen(R.dimen.grid_margin)))
             recyclerView.layoutManager = GridLayoutManager(requireContext(), GRID_SIZE)
             recyclerView.adapter = adapter
+            recyclerView.clipToOutline = true
             adapter.onItemClick = ::onItemClick
         }
     }
@@ -56,17 +56,15 @@ class EpisodeDetailsFragment : Fragment(R.layout.fragment_episode_details) {
 
     private fun render(state: DetailsState) {
         if (state is DetailsState.Data<*>) {
-            launchSubscribeFlow(state.item) {
-                binding.bindUi(it as EpisodeWithDetails)
-            }
+            binding.bindUi(state.item as EpisodeWithDetails)
         }
     }
 
     private fun FragmentEpisodeDetailsBinding.bindUi(item: EpisodeWithDetails) {
         name.text = item.episode.name
         name.isSelected = true
-        airDate.text = item.episode.airDate
-        created.text = item.detailsWithCharacters.details.created
+        airDate.text = getString(R.string.air_date, item.episode.airDate)
+        created.text = getString(R.string.created, item.detailsWithCharacters.details.created)
         episodeCode.text = item.detailsWithCharacters.details.episodeCode
         adapter.update(item.detailsWithCharacters.characters)
     }

@@ -14,7 +14,7 @@ class LocationFragment : PagingFragment<Location>() {
 
     override val viewModel: LocationPagingViewModel by viewModels()
 
-    override fun getDetailsNavigationDirection(id: String) =
+    override fun getDetailsNavigationDirection(id: Long) =
         LocationFragmentDirections.actionLocationsDestToLocationDetailsFragment(id)
 
 }
